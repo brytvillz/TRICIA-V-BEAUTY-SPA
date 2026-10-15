@@ -4,34 +4,40 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>TRICIA-V unisex salon and spa | Pedicure, Nails &amp; Spa in Nnewi Anambra</title>
-<meta name="description" content="TRICIA-V unisex salon and spa - premium pedicure, manicure, facials, Moroccan radiance therapy, semi-permanent tattoos and home services in Nnewi, Anambra. Book on WhatsApp.">
+<title>TRICIA-V Unisex Salon and Spa | Pedicure, Nails &amp; Spa in Nnewi Anambra</title>
+<meta name="description" content="TRICIA-V Unisex Salon and Spa - premium pedicure, manicure, facials, Moroccan radiance therapy, semi-permanent tattoos and home services in Nnewi, Anambra. Book on WhatsApp.">
 <meta name="theme-color" content="#0A0A0A">
 <link rel="canonical" href="https://tricia-v.vercel.app">
-<link rel="icon" href="/favicon.ico">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="TRICIA-V unisex salon and spa | Pedicure, Nails &amp; Spa in Nnewi Anambra">
-<meta property="og:description" content="TRICIA-V unisex salon and spa - premium pedicure, manicure, facials, Moroccan radiance therapy, semi-permanent tattoos and home services in Nnewi, Anambra. Book on WhatsApp.">
+<meta property="og:title" content="TRICIA-V Unisex Salon and Spa | Pedicure, Nails &amp; Spa in Nnewi Anambra">
+<meta property="og:description" content="TRICIA-V Unisex Salon and Spa - premium pedicure, manicure, facials, Moroccan radiance therapy, semi-permanent tattoos and home services in Nnewi, Anambra. Book on WhatsApp.">
 <meta property="og:url" content="https://tricia-v.vercel.app">
 <meta property="og:image" content="https://tricia-v.vercel.app/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="TRICIA-V unisex salon and spa | Pedicure, Nails &amp; Spa in Nnewi Anambra">
+<meta name="twitter:title" content="TRICIA-V Unisex Salon and Spa | Pedicure, Nails &amp; Spa in Nnewi Anambra">
 <meta name="twitter:description" content="Premium pedicure, manicure, facials, Moroccan radiance therapy, semi-permanent tattoos and home services in Nnewi, Anambra. Book on WhatsApp.">
 <meta name="twitter:image" content="https://tricia-v.vercel.app/og-image.jpg">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"></noscript>
 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "BeautySalon",
-  "name": "TRICIA-V unisex salon and spa",
-  "image": "https://tricia-v.vercel.app/images/hero.jpg",
+  "name": "TRICIA-V Unisex Salon and Spa",
+  "image": "https://tricia-v.vercel.app/og-image.jpg",
+  "logo": "https://tricia-v.vercel.app/images/logo-512.png",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "40 Bishop Uzodike Rd",
@@ -135,7 +141,10 @@ section{position:relative;scroll-margin-top:var(--nav-h)}
 }
 .nav.scrolled{background:rgba(10,10,10,.95);border-bottom-color:var(--border);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;width:100%}
+.brand{display:inline-flex;align-items:center;gap:12px}
+.brand-mark{width:40px;height:40px;flex:none}
 .logo{font-family:var(--serif);font-weight:600;font-size:28px;letter-spacing:.14em;color:var(--gold)}
+.foot-logo{width:120px;height:120px;margin-bottom:20px}
 .nav-links{display:flex;align-items:center;gap:40px}
 .nav-links a:not(.btn){font-size:14px;letter-spacing:.08em;color:var(--cream);transition:color .3s}
 .nav-links a:not(.btn):hover{color:var(--gold-light)}
@@ -155,12 +164,24 @@ section{position:relative;scroll-margin-top:var(--nav-h)}
     radial-gradient(ellipse 80% 60% at 10% 100%,rgba(201,168,76,.06),transparent 70%),
     var(--bg);
 }
-.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
 .hero::after{
-  content:"";position:absolute;inset:0;z-index:1;
-  background:linear-gradient(90deg,rgba(10,10,10,.88) 0%,rgba(10,10,10,.6) 55%,rgba(10,10,10,.35) 100%),
-             linear-gradient(0deg,var(--bg) 0%,transparent 28%);
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(0deg,var(--bg) 0%,transparent 22%);
 }
+.hero-grid{
+  display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
+  gap:clamp(32px,5vw,80px);align-items:center;padding-block:clamp(24px,4vw,56px);
+}
+.hero-art{position:relative;width:100%;max-width:560px;margin-left:auto;aspect-ratio:8/9}
+.layer{position:absolute;will-change:transform}
+.layer .media{width:100%}
+.l-main{left:30%;top:4%;width:64%;z-index:1}
+.l-main .media{aspect-ratio:4/5}
+.l-f1,.l-f2,.l-f3{z-index:2}
+.l-f1 .media,.l-f2 .media,.l-f3 .media{aspect-ratio:1/1;box-shadow:0 14px 40px -10px rgba(0,0,0,.7)}
+.l-f1{left:0;top:12%;width:28%}
+.l-f2{right:0;top:68%;width:27%}
+.l-f3{left:8%;top:62%;width:30%}
 .hero .wrap{position:relative;z-index:2;width:100%;padding-top:var(--nav-h)}
 h1{
   font-family:var(--serif);font-weight:400;color:var(--cream);
@@ -187,7 +208,7 @@ h1 .gold{color:var(--gold-light);font-style:italic}
 }
 .media::before{content:"";position:absolute;inset:14px;border:1px solid rgba(201,168,76,.2);pointer-events:none;z-index:0}
 .media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;will-change:transform}
-.media img:not(.ok),.hero-img:not(.ok){opacity:0}
+.media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
 
 /* ───────── SERVICES ───────── */
 .services-head{max-width:760px}
@@ -204,7 +225,6 @@ h1 .gold{color:var(--gold-light);font-style:italic}
   box-shadow:0 18px 50px -12px rgba(201,168,76,.28),0 0 0 1px rgba(201,168,76,.25);
 }
 .svc:nth-child(1){grid-column:span 4}
-.svc:nth-child(10){grid-column:span 4}
 .svc .ic{width:34px;height:34px;color:var(--gold);margin-bottom:56px}
 .svc h3{font-family:var(--serif);font-weight:600;font-size:26px;line-height:1.15;color:var(--cream)}
 .svc p{margin-top:12px;color:var(--muted);font-size:15px;line-height:1.6;flex:1}
@@ -276,8 +296,13 @@ h1 .gold{color:var(--gold-light);font-style:italic}
 .book-cta .lede{font-size:18px;color:rgba(245,240,232,.74);max-width:46ch}
 .book-cta .btn{margin-top:44px}
 .book-hours{margin-top:20px;color:var(--gold);font-size:14px;letter-spacing:.08em}
-.contact{margin-top:96px;display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--border)}
-.contact>*{display:flex;gap:18px;align-items:flex-start;padding:36px 32px 36px 0;color:var(--cream)}
+.book-info{margin-top:96px;display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(32px,6vw,96px);align-items:start}
+.contact{display:grid;grid-template-columns:1fr;gap:0;border-top:1px solid var(--border)}
+.addr-note{display:block;margin-top:6px;font-size:13px;color:var(--muted)}
+.frontage{margin:0;max-width:460px;width:100%}
+.frontage .media{aspect-ratio:1/1}
+.frontage figcaption{margin-top:14px;font-size:13px;color:var(--muted);line-height:1.5}
+.contact>*{display:flex;gap:18px;align-items:flex-start;padding:28px 0;border-bottom:1px solid var(--border);color:var(--cream)}
 .contact .ic{color:var(--gold);margin-top:2px}
 .contact small{display:block;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
 .contact a:hover span{color:var(--gold-light)}
@@ -289,7 +314,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:88px 0 0}
 .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:48px}
 .foot-brand .logo{font-size:34px;display:block}
 .foot-brand p{margin-top:14px;color:var(--muted);font-family:var(--serif);font-size:20px;font-style:italic}
-footer h4{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:22px}
+footer h3{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:22px}
 footer li+li{margin-top:10px}
 footer li a{color:rgba(245,240,232,.72);font-size:15px;transition:color .3s}
 footer li a:hover{color:var(--gold-light)}
@@ -320,7 +345,8 @@ footer li a:hover{color:var(--gold-light)}
 /* ───────── RESPONSIVE ───────── */
 @media (max-width:1023px){
   .svc-grid{grid-template-columns:repeat(2,1fr)}
-  .svc,.svc:nth-child(1),.svc:nth-child(10){grid-column:span 1}
+  .svc,.svc:nth-child(1){grid-column:span 1}
+  .svc:last-child{grid-column:1/-1}
   .svc .ic{margin-bottom:40px}
   .pkg-row{grid-template-columns:repeat(2,1fr)}
   .pkg:nth-child(2){margin-top:0}
@@ -330,8 +356,7 @@ footer li a:hover{color:var(--gold-light)}
   .gal-item:nth-child(even){margin-top:32px}
   .foot-grid{grid-template-columns:1fr 1fr}
   .foot-brand{grid-column:1/-1}
-  .contact{grid-template-columns:1fr}
-  .contact>*{padding:28px 0;border-bottom:1px solid var(--border)}
+  .book-info{grid-template-columns:1fr}
 }
 @media (max-width:860px){
   .nav-links{
@@ -343,11 +368,16 @@ footer li a:hover{color:var(--gold-light)}
   .nav-links .btn{padding:15px 36px;font-size:15px}
   .burger{display:block}
   .about-grid{grid-template-columns:1fr}
+  .hero-grid{grid-template-columns:1fr;gap:48px}
+  .hero-art{max-width:440px;margin:0 auto}
+  .chevron{display:none}
   .about-img{max-width:420px}
 }
 @media (max-width:767px){
   :root{--nav-h:68px}
   .logo{font-size:24px}
+  .brand{gap:10px}
+  .brand-mark{width:34px;height:34px}
   .hero p.sub{font-size:16px}
   .hero-cta .btn{flex:1 1 100%}
   .svc-grid{grid-template-columns:1fr;margin-top:48px}
@@ -365,7 +395,7 @@ footer li a:hover{color:var(--gold-light)}
   .pkg-row::-webkit-scrollbar{display:none}
   .pkg{flex:0 0 82%;scroll-snap-align:start;padding:36px 26px 28px}
   .values li{font-size:21px}
-  .contact{margin-top:64px}
+  .book-info{margin-top:64px}
   .btn-wa{width:100%;padding:20px 24px}
   .foot-grid{grid-template-columns:1fr 1fr;gap:40px 24px}
   footer{padding-top:64px}
@@ -397,6 +427,13 @@ footer li a:hover{color:var(--gold-light)}
     <symbol id="i-tattoo" viewBox="0 0 24 24"><path d="M4 20l1-4L16.500 4.500a2 2 0 0 1 2.800 0l.2.200a2 2 0 0 1 0 2.800L8 19l-4 1z"/><path d="M14.500 6.500l3 3M5 16l3 3"/></symbol>
     <symbol id="i-home" viewBox="0 0 24 24"><path d="M3.500 11L12 3.500 20.500 11"/><path d="M5.500 9.500V20h13V9.500"/><path d="M12 16.500c-2.200-1.500-3-2.500-3-3.700a1.800 1.800 0 0 1 3-1.200 1.800 1.800 0 0 1 3 1.200c0 1.200-.8 2.200-3 3.700z"/></symbol>
     <symbol id="i-consult" viewBox="0 0 24 24"><path d="M4 5.500A1.500 1.500 0 0 1 5.500 4h13A1.500 1.500 0 0 1 20 5.500v9a1.500 1.500 0 0 1-1.500 1.500H10l-4.500 4v-4H5.500A1.500 1.500 0 0 1 4 14.500z"/><path d="M8 8.500h8M8 12h5"/></symbol>
+ <symbol id="i-teeth" viewBox="0 0 24 24"><path d="M3.500 12c2-5 15-5 17 0-1.500 4.500-5 6.500-8.500 6.500S5 16.500 3.500 12z"/><path d="M8 9v7.500M12 8.500V18M16 9v7.500"/></symbol>
+    <symbol id="i-pierce" viewBox="0 0 24 24"><circle cx="12" cy="14" r="6"/><circle cx="12" cy="6" r="1.500"/></symbol>
+    <symbol id="i-braid" viewBox="0 0 24 24"><path d="M7 3c4 3-4 6 0 9s-4 6 0 9M12 3c4 3-4 6 0 9s-4 6 0 9M17 3c-4 3 4 6 0 9s4 6 0 9"/></symbol>
+    <symbol id="i-lash" viewBox="0 0 24 24"><path d="M3 13c3-5 15-5 18 0-3 5-15 5-18 0z"/><circle cx="12" cy="13" r="2.500"/><path d="M12 6V3.500M7 7.500L5.500 5.500M17 7.500l1.500-2"/></symbol>
+    <symbol id="i-brow" viewBox="0 0 24 24"><path d="M4 14c4-5.500 10-6.500 16-3.500"/><path d="M7 13l1 2.500M10 11.500l1 2.500M13 10.700l1 2.500M16 10.500l1 2.200"/></symbol>
+    <symbol id="i-massage" viewBox="0 0 24 24"><ellipse cx="12" cy="17.500" rx="6.500" ry="2.500"/><ellipse cx="12" cy="12.500" rx="4.500" ry="2"/><ellipse cx="12" cy="8.500" rx="3" ry="1.600"/></symbol>
+    <symbol id="i-acne" viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3 8.500-7 10-4-1.500-7-5-7-10V6z"/><path d="M9 12l2 2 4-4.500"/></symbol>
     <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21.500c-4-3.800-6.500-7-6.500-10.500a6.500 6.500 0 0 1 13 0c0 3.500-2.500 6.700-6.500 10.500z"/><circle cx="12" cy="11" r="2.300"/></symbol>
     <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 3.500h3.500l1.800 4.500-2.300 1.500a11 11 0 0 0 5 5l1.500-2.300 4.500 1.800V17.500A2 2 0 0 1 17 19.500C9.800 19.500 4.500 14.200 4.500 7A2 2 0 0 1 5 3.500z"/></symbol>
     <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.500l3.500 2"/></symbol>
@@ -411,12 +448,15 @@ footer li a:hover{color:var(--gold-light)}
 <!-- ═════════ 1 NAVBAR ═════════ -->
 <header class="nav" id="nav">
   <div class="wrap">
-    <a href="#" class="logo" aria-label="TRICIA-V, back to top">TRICIA-V</a>
+    <a href="#" class="brand" aria-label="TRICIA-V, back to top">
+      <picture><source srcset="/images/logo-mark-192.webp" type="image/webp"><img class="brand-mark" src="/images/logo-mark-192.png" alt="" width="192" height="192" decoding="async"></picture>
+      <span class="logo">TRICIA-V</span>
+    </a>
     <nav class="nav-links" id="navLinks" aria-label="Main">
       <a href="#services">Services</a>
       <a href="#gallery">Gallery</a>
       <a href="#about">About</a>
-      <a href="https://wa.me/2348061172417?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20at%20TRICIA-V%20unisex%20salon%20and%20spa" class="btn btn-gold" target="_blank" rel="noopener">Book Now</a>
+      <a href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." class="btn btn-gold" target="_blank" rel="noopener">Book Now</a>
     </nav>
     <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
   </div>
@@ -426,17 +466,25 @@ footer li a:hover{color:var(--gold-light)}
 
 <!-- ═════════ 2 HERO ═════════ -->
 <section class="hero" id="top">
-  <img class="hero-img" src="/images/hero.jpg" width="1920" height="1080" alt="Inside TRICIA-V unisex salon and spa, Nnewi" fetchpriority="high" decoding="async">
-  <div class="wrap">
+  <div class="wrap hero-grid">
+   <div class="hero-text">
     <h1 id="heroTitle">
       <span class="line"><span>Beauty Redefined.</span></span>
       <span class="line"><span class="gold">Nnewi's Premium Spa &amp; Salon.</span></span>
     </h1>
     <p class="sub" data-hero>Pedicures, nail art, facials, Moroccan radiance therapy, semi-permanent tattoos and home services - in the heart of Nnewi, Anambra.</p>
     <div class="hero-cta" data-hero>
-      <a class="btn btn-gold" href="https://wa.me/2348061172417?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20at%20TRICIA-V%20unisex%20salon%20and%20spa" target="_blank" rel="noopener">Book on WhatsApp</a>
+      <a class="btn btn-gold" href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener">Book on WhatsApp</a>
       <a class="btn btn-line" href="#services">View Services</a>
     </div>
+   </div>
+   <!-- HERO CARDS - real photos (see ALT-TEXT.md). Not lazy-loaded: they are above the fold. -->
+   <div class="hero-art" id="heroArt">
+    <div class="layer l-main" data-depth="0.35"><div class="media"><picture><source srcset="/images/hero-main-sm.webp 440w, /images/hero-main.webp 800w" sizes="(max-width: 859px) min(282px, 57.6vw), (max-width: 1387px) 25.9vw, 358px" type="image/webp"><img src="/images/hero-main.jpg" srcset="/images/hero-main-sm.jpg 440w, /images/hero-main.jpg 800w" sizes="(max-width: 859px) min(282px, 57.6vw), (max-width: 1387px) 25.9vw, 358px" alt="Therapist giving a client a cold-steam facial at TRICIA-V Unisex Salon and Spa, Nnewi" width="800" height="1000" fetchpriority="high" decoding="async"></picture></div></div>
+    <div class="layer l-f1" data-depth="1"><div class="media"><picture><source srcset="/images/hero-float-1-sm.webp 300w, /images/hero-float-1.webp 600w" sizes="(max-width: 859px) min(123px, 25.2vw), (max-width: 1387px) 11.3vw, 157px" type="image/webp"><img src="/images/hero-float-1.jpg" srcset="/images/hero-float-1-sm.jpg 300w, /images/hero-float-1.jpg 600w" sizes="(max-width: 859px) min(123px, 25.2vw), (max-width: 1387px) 11.3vw, 157px" alt="Freshly shaped and tinted eyebrows, close-up" width="600" height="600" decoding="async"></picture></div></div>
+    <div class="layer l-f2" data-depth="1.4"><div class="media"><picture><source srcset="/images/hero-float-2-sm.webp 300w, /images/hero-float-2.webp 600w" sizes="(max-width: 859px) min(119px, 24.3vw), (max-width: 1387px) 10.9vw, 151px" type="image/webp"><img src="/images/hero-float-2.jpg" srcset="/images/hero-float-2-sm.jpg 300w, /images/hero-float-2.jpg 600w" sizes="(max-width: 859px) min(119px, 24.3vw), (max-width: 1387px) 10.9vw, 151px" alt="Pedicure chairs and lit TRICIA-V logo inside the salon" width="600" height="600" decoding="async"></picture></div></div>
+    <div class="layer l-f3" data-depth="0.7"><div class="media"><picture><source srcset="/images/hero-float-3-sm.webp 300w, /images/hero-float-3.webp 600w" sizes="(max-width: 859px) min(132px, 27vw), (max-width: 1387px) 12.1vw, 168px" type="image/webp"><img src="/images/hero-float-3.jpg" srcset="/images/hero-float-3-sm.jpg 300w, /images/hero-float-3.jpg 600w" sizes="(max-width: 859px) min(132px, 27vw), (max-width: 1387px) 12.1vw, 168px" alt="Almond nails with black French tips" width="600" height="600" decoding="async"></picture></div></div>
+   </div>
   </div>
   <svg class="ic chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
 </section>
@@ -453,61 +501,103 @@ footer li a:hover{color:var(--gold-light)}
         <svg class="ic" aria-hidden="true"><use href="#i-pedicure"/></svg>
         <h3>Pedicure</h3>
         <p>Classic, spa and luxury pedicures, from a simple tidy-up to a full indulgence.</p>
-        <a class="dm" href="https://wa.me/2348061172417?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20at%20TRICIA-V%20unisex%20salon%20and%20spa" target="_blank" rel="noopener" aria-label="Pedicure: DM to book on WhatsApp">DM to book</a>
+        <a class="dm" href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" aria-label="Pedicure: DM to book on WhatsApp">DM to book</a>
       </article>
       <article class="svc" data-reveal>
         <svg class="ic" aria-hidden="true"><use href="#i-manicure"/></svg>
         <h3>Manicure &amp; Nail Art</h3>
         <p>Classic and gel manicures, with custom nail art designed around you.</p>
-        <a class="dm" href="https://wa.me/2348061172417?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20at%20TRICIA-V%20unisex%20salon%20and%20spa" target="_blank" rel="noopener" aria-label="Manicure and Nail Art: DM to book on WhatsApp">DM to book</a>
+        <a class="dm" href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" aria-label="Manicure and Nail Art: DM to book on WhatsApp">DM to book</a>
       </article>
       <article class="svc" data-reveal>
         <svg class="ic" aria-hidden="true"><use href="#i-facial"/></svg>
         <h3>Facials &amp; Skin Renewal</h3>
         <p>Facials that cleanse, restore and renew tired skin.</p>
-        <a class="dm" href="https://wa.me/2348061172417?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20at%20TRICIA-V%20unisex%20salon%20and%20spa" target="_blank" rel="noopener" aria-label="Facials and Skin Renewal: DM to book on WhatsApp">DM to book</a>
+        <a class="dm" href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" aria-label="Facials and Skin Renewal: DM to book on WhatsApp">DM to book</a>
       </article>
       <article class="svc" data-reveal>
         <svg class="ic" aria-hidden="true"><use href="#i-radiance"/></svg>
         <h3>Moroccan Radiance Therapy</h3>
         <p>A Moroccan-inspired treatment for skin that looks rested and glowing.</p>
-        <a class="dm" href="https://wa.me/2348061172417?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20at%20TRICIA-V%20unisex%20salon%20and%20spa" target="_blank" rel="noopener" aria-label="Moroccan Radiance Therapy: DM to book on WhatsApp">DM to book</a>
+        <a class="dm" href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" aria-label="Moroccan Radiance Therapy: DM to book on WhatsApp">DM to book</a>
       </article>
       <article class="svc" data-reveal>
         <svg class="ic" aria-hidden="true"><use href="#i-wax"/></svg>
         <h3>Waxing &amp; Hair Removal</h3>
         <p>Careful, clean hair removal for a smooth finish.</p>
-        <a class="dm" href="https://wa.me/2348061172417?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20at%20TRICIA-V%20unisex%20salon%20and%20spa" target="_blank" rel="noopener" aria-label="Waxing and Hair Removal: DM to book on WhatsApp">DM to book</a>
+        <a class="dm" href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" aria-label="Waxing and Hair Removal: DM to book on WhatsApp">DM to book</a>
       </article>
       <article class="svc" data-reveal>
         <svg class="ic" aria-hidden="true"><use href="#i-body"/></svg>
         <h3>Spa Body Treatments</h3>
         <p>Slow, restorative body treatments to switch off and unwind.</p>
-        <a class="dm" href="https://wa.me/2348061172417?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20at%20TRICIA-V%20unisex%20salon%20and%20spa" target="_blank" rel="noopener" aria-label="Spa Body Treatments: DM to book on WhatsApp">DM to book</a>
+        <a class="dm" href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" aria-label="Spa Body Treatments: DM to book on WhatsApp">DM to book</a>
       </article>
       <article class="svc" data-reveal>
         <svg class="ic" aria-hidden="true"><use href="#i-hair"/></svg>
         <h3>Hair Styling &amp; Colour</h3>
         <p>Styling and colour for everyday looks and special occasions.</p>
-        <a class="dm" href="https://wa.me/2348061172417?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20at%20TRICIA-V%20unisex%20salon%20and%20spa" target="_blank" rel="noopener" aria-label="Hair Styling and Colour: DM to book on WhatsApp">DM to book</a>
+        <a class="dm" href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" aria-label="Hair Styling and Colour: DM to book on WhatsApp">DM to book</a>
       </article>
       <article class="svc" data-reveal>
         <svg class="ic" aria-hidden="true"><use href="#i-tattoo"/></svg>
-        <h3>Semi-Permanent Tattoos</h3>
-        <p>Brows, eyeliner and lip blush, for a defined look that stays.</p>
-        <a class="dm" href="https://wa.me/2348061172417?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20at%20TRICIA-V%20unisex%20salon%20and%20spa" target="_blank" rel="noopener" aria-label="Semi-Permanent Tattoos: DM to book on WhatsApp">DM to book</a>
+        <h3>Tattoos</h3>
+        <p>Semi-permanent brows, eyeliner, lip blush, and body designs.</p>
+        <a class="dm" href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" aria-label="Tattoos: DM to book on WhatsApp">DM to book</a>
       </article>
       <article class="svc" data-reveal>
         <svg class="ic" aria-hidden="true"><use href="#i-home"/></svg>
         <h3>Home Services</h3>
         <p>Any treatment we offer, brought to your door anywhere in Anambra.</p>
-        <a class="dm" href="https://wa.me/2348061172417?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20at%20TRICIA-V%20unisex%20salon%20and%20spa" target="_blank" rel="noopener" aria-label="Home Services: DM to book on WhatsApp">DM to book</a>
+        <a class="dm" href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" aria-label="Home Services: DM to book on WhatsApp">DM to book</a>
       </article>
       <article class="svc" data-reveal>
         <svg class="ic" aria-hidden="true"><use href="#i-consult"/></svg>
         <h3>Skin Consultation</h3>
         <p>Talk through your skin with us and leave knowing which treatment is right for you.</p>
-        <a class="dm" href="https://wa.me/2348061172417?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20at%20TRICIA-V%20unisex%20salon%20and%20spa" target="_blank" rel="noopener" aria-label="Skin Consultation: DM to book on WhatsApp">DM to book</a>
+        <a class="dm" href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" aria-label="Skin Consultation: DM to book on WhatsApp">DM to book</a>
+      </article>
+      <article class="svc" data-reveal>
+        <svg class="ic" aria-hidden="true"><use href="#i-teeth"/></svg>
+        <h3>Teeth Whitening</h3>
+        <p>Whitening treatments for a brighter smile.</p>
+        <a class="dm" href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" aria-label="Teeth Whitening: DM to book on WhatsApp">DM to book</a>
+      </article>
+      <article class="svc" data-reveal>
+        <svg class="ic" aria-hidden="true"><use href="#i-pierce"/></svg>
+        <h3>Piercing</h3>
+        <p>Piercing, done with care.</p>
+        <a class="dm" href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" aria-label="Piercing: DM to book on WhatsApp">DM to book</a>
+      </article>
+      <article class="svc" data-reveal>
+        <svg class="ic" aria-hidden="true"><use href="#i-braid"/></svg>
+        <h3>Braids &amp; Locs</h3>
+        <p>Braids and locs, styled and maintained.</p>
+        <a class="dm" href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" aria-label="Braids and Locs: DM to book on WhatsApp">DM to book</a>
+      </article>
+      <article class="svc" data-reveal>
+        <svg class="ic" aria-hidden="true"><use href="#i-lash"/></svg>
+        <h3>Lashes &amp; Brow Lamination</h3>
+        <p>Lash and brow treatments for a fuller, defined look.</p>
+        <a class="dm" href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" aria-label="Lashes and Brow Lamination: DM to book on WhatsApp">DM to book</a>
+      </article>
+      <article class="svc" data-reveal>
+        <svg class="ic" aria-hidden="true"><use href="#i-brow"/></svg>
+        <h3>Microblading</h3>
+        <p>Hair-stroke brows for a natural, defined shape.</p>
+        <a class="dm" href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" aria-label="Microblading: DM to book on WhatsApp">DM to book</a>
+      </article>
+      <article class="svc" data-reveal>
+        <svg class="ic" aria-hidden="true"><use href="#i-massage"/></svg>
+        <h3>Massage</h3>
+        <p>Massage to release tension and help you relax.</p>
+        <a class="dm" href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" aria-label="Massage: DM to book on WhatsApp">DM to book</a>
+      </article>
+      <article class="svc" data-reveal>
+        <svg class="ic" aria-hidden="true"><use href="#i-acne"/></svg>
+        <h3>Acne Treatment</h3>
+        <p>Targeted care for acne-prone skin.</p>
+        <a class="dm" href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" aria-label="Acne Treatment: DM to book on WhatsApp">DM to book</a>
       </article>
     </div>
   </div>
@@ -523,15 +613,15 @@ footer li a:hover{color:var(--gold-light)}
       </div>
     </div>
     <div class="gal-grid">
-      <button type="button" class="gal-item media" data-reveal aria-label="Open photo: pedicure"><img src="/images/gallery-01.jpg" width="1000" height="1000" loading="lazy" decoding="async" alt="Luxury spa pedicure at TRICIA-V unisex salon and spa, Nnewi"></button>
-      <button type="button" class="gal-item media" data-reveal aria-label="Open photo: gel manicure"><img src="/images/gallery-02.jpg" width="1000" height="1000" loading="lazy" decoding="async" alt="Gel manicure with nail art at TRICIA-V unisex salon and spa, Nnewi"></button>
-      <button type="button" class="gal-item media" data-reveal aria-label="Open photo: facial"><img src="/images/gallery-03.jpg" width="1000" height="1000" loading="lazy" decoding="async" alt="Facial and skin renewal treatment at TRICIA-V unisex salon and spa, Nnewi"></button>
-      <button type="button" class="gal-item media" data-reveal aria-label="Open photo: Moroccan radiance therapy"><img src="/images/gallery-04.jpg" width="1000" height="1000" loading="lazy" decoding="async" alt="Moroccan radiance therapy at TRICIA-V unisex salon and spa, Nnewi"></button>
-      <button type="button" class="gal-item media" data-reveal aria-label="Open photo: semi-permanent brows"><img src="/images/gallery-05.jpg" width="1000" height="1000" loading="lazy" decoding="async" alt="Semi-permanent brow tattoo at TRICIA-V unisex salon and spa, Nnewi"></button>
-      <button type="button" class="gal-item media" data-reveal aria-label="Open photo: lip blush"><img src="/images/gallery-06.jpg" width="1000" height="1000" loading="lazy" decoding="async" alt="Semi-permanent lip blush at TRICIA-V unisex salon and spa, Nnewi"></button>
-      <button type="button" class="gal-item media" data-reveal aria-label="Open photo: hair styling"><img src="/images/gallery-07.jpg" width="1000" height="1000" loading="lazy" decoding="async" alt="Hair styling and colour at TRICIA-V unisex salon and spa, Nnewi"></button>
-      <button type="button" class="gal-item media" data-reveal aria-label="Open photo: classic pedicure"><img src="/images/gallery-08.jpg" width="1000" height="1000" loading="lazy" decoding="async" alt="Classic pedicure at TRICIA-V unisex salon and spa, Nnewi"></button>
-      <button type="button" class="gal-item media" data-reveal aria-label="Open photo: spa body treatment"><img src="/images/gallery-09.jpg" width="1000" height="1000" loading="lazy" decoding="async" alt="Spa body treatment at TRICIA-V unisex salon and spa, Nnewi"></button>
+      <button type="button" class="gal-item media" data-reveal aria-label="Open photo: Facial treatment with steam at TRICIA-V"><picture><source srcset="/images/gallery-01-sm.webp 450w, /images/gallery-01.webp 900w" sizes="(max-width: 1023px) calc(45vw - 6px), (max-width: 1440px) calc(30vw - 11px), 435px" type="image/webp"><img src="/images/gallery-01.jpg" srcset="/images/gallery-01-sm.jpg 450w, /images/gallery-01.jpg 900w" sizes="(max-width: 1023px) calc(45vw - 6px), (max-width: 1440px) calc(30vw - 11px), 435px" alt="Facial treatment with steam at TRICIA-V" width="900" height="900" loading="lazy" decoding="async"></picture></button>
+      <button type="button" class="gal-item media" data-reveal aria-label="Open photo: Client under an LED light therapy mask"><picture><source srcset="/images/gallery-02-sm.webp 450w, /images/gallery-02.webp 900w" sizes="(max-width: 1023px) calc(45vw - 6px), (max-width: 1440px) calc(30vw - 11px), 435px" type="image/webp"><img src="/images/gallery-02.jpg" srcset="/images/gallery-02-sm.jpg 450w, /images/gallery-02.jpg 900w" sizes="(max-width: 1023px) calc(45vw - 6px), (max-width: 1440px) calc(30vw - 11px), 435px" alt="Client under an LED light therapy mask" width="900" height="900" loading="lazy" decoding="async"></picture></button>
+      <button type="button" class="gal-item media" data-reveal aria-label="Open photo: Long curly braids, finished, in front of the TRICIA-V sign"><picture><source srcset="/images/gallery-03-sm.webp 450w, /images/gallery-03.webp 900w" sizes="(max-width: 1023px) calc(45vw - 6px), (max-width: 1440px) calc(30vw - 11px), 435px" type="image/webp"><img src="/images/gallery-03.jpg" srcset="/images/gallery-03-sm.jpg 450w, /images/gallery-03.jpg 900w" sizes="(max-width: 1023px) calc(45vw - 6px), (max-width: 1440px) calc(30vw - 11px), 435px" alt="Long curly braids, finished, in front of the TRICIA-V sign" width="900" height="900" loading="lazy" decoding="async"></picture></button>
+      <button type="button" class="gal-item media" data-reveal aria-label="Open photo: Knotless box braids, finished"><picture><source srcset="/images/gallery-04-sm.webp 450w, /images/gallery-04.webp 900w" sizes="(max-width: 1023px) calc(45vw - 6px), (max-width: 1440px) calc(30vw - 11px), 435px" type="image/webp"><img src="/images/gallery-04.jpg" srcset="/images/gallery-04-sm.jpg 450w, /images/gallery-04.jpg 900w" sizes="(max-width: 1023px) calc(45vw - 6px), (max-width: 1440px) calc(30vw - 11px), 435px" alt="Knotless box braids, finished" width="900" height="900" loading="lazy" decoding="async"></picture></button>
+      <button type="button" class="gal-item media" data-reveal aria-label="Open photo: Foot massage during a spa pedicure"><picture><source srcset="/images/gallery-05-sm.webp 450w, /images/gallery-05.webp 900w" sizes="(max-width: 1023px) calc(45vw - 6px), (max-width: 1440px) calc(30vw - 11px), 435px" type="image/webp"><img src="/images/gallery-05.jpg" srcset="/images/gallery-05-sm.jpg 450w, /images/gallery-05.jpg 900w" sizes="(max-width: 1023px) calc(45vw - 6px), (max-width: 1440px) calc(30vw - 11px), 435px" alt="Foot massage during a spa pedicure" width="900" height="900" loading="lazy" decoding="async"></picture></button>
+      <button type="button" class="gal-item media" data-reveal aria-label="Open photo: Almond nails with black French tips"><picture><source srcset="/images/gallery-06-sm.webp 450w, /images/gallery-06.webp 900w" sizes="(max-width: 1023px) calc(45vw - 6px), (max-width: 1440px) calc(30vw - 11px), 435px" type="image/webp"><img src="/images/gallery-06.jpg" srcset="/images/gallery-06-sm.jpg 450w, /images/gallery-06.jpg 900w" sizes="(max-width: 1023px) calc(45vw - 6px), (max-width: 1440px) calc(30vw - 11px), 435px" alt="Almond nails with black French tips" width="900" height="900" loading="lazy" decoding="async"></picture></button>
+      <button type="button" class="gal-item media" data-reveal aria-label="Open photo: Brow lamination in progress"><picture><source srcset="/images/gallery-07-sm.webp 450w, /images/gallery-07.webp 900w" sizes="(max-width: 1023px) calc(45vw - 6px), (max-width: 1440px) calc(30vw - 11px), 435px" type="image/webp"><img src="/images/gallery-07.jpg" srcset="/images/gallery-07-sm.jpg 450w, /images/gallery-07.jpg 900w" sizes="(max-width: 1023px) calc(45vw - 6px), (max-width: 1440px) calc(30vw - 11px), 435px" alt="Brow lamination in progress" width="900" height="900" loading="lazy" decoding="async"></picture></button>
+      <button type="button" class="gal-item media" data-reveal aria-label="Open photo: Winged dollar-sign tattoo on a client&#39;s shoulder"><picture><source srcset="/images/gallery-08-sm.webp 450w, /images/gallery-08.webp 900w" sizes="(max-width: 1023px) calc(45vw - 6px), (max-width: 1440px) calc(30vw - 11px), 435px" type="image/webp"><img src="/images/gallery-08.jpg" srcset="/images/gallery-08-sm.jpg 450w, /images/gallery-08.jpg 900w" sizes="(max-width: 1023px) calc(45vw - 6px), (max-width: 1440px) calc(30vw - 11px), 435px" alt="Winged dollar-sign tattoo on a client&#39;s shoulder" width="900" height="900" loading="lazy" decoding="async"></picture></button>
+      <button type="button" class="gal-item media" data-reveal aria-label="Open photo: Men&#39;s facial with a high-frequency wand"><picture><source srcset="/images/gallery-09-sm.webp 450w, /images/gallery-09.webp 900w" sizes="(max-width: 1023px) calc(45vw - 6px), (max-width: 1440px) calc(30vw - 11px), 435px" type="image/webp"><img src="/images/gallery-09.jpg" srcset="/images/gallery-09-sm.jpg 450w, /images/gallery-09.jpg 900w" sizes="(max-width: 1023px) calc(45vw - 6px), (max-width: 1440px) calc(30vw - 11px), 435px" alt="Men&#39;s facial with a high-frequency wand" width="900" height="900" loading="lazy" decoding="async"></picture></button>
     </div>
   </div>
 </section>
@@ -540,7 +630,10 @@ footer li a:hover{color:var(--gold-light)}
 <section class="sec" id="about">
   <div class="wrap about-grid">
     <div class="about-img media" data-reveal>
-      <img src="/images/about.jpg" width="800" height="1000" loading="lazy" decoding="async" alt="The TRICIA-V unisex salon and spa space in Nnewi, Anambra">
+      <video id="aboutVideo" poster="/images/about-poster.jpg" width="576" height="720" muted loop playsinline autoplay preload="none" aria-label="A short tour of TRICIA-V and some of our treatments">
+        <source data-src="/videos/about-loop.webm" type="video/webm">
+        <source data-src="/videos/about-loop.mp4" type="video/mp4">
+      </video>
     </div>
     <div class="about-copy">
       <div data-reveal>
@@ -552,7 +645,7 @@ footer li a:hover{color:var(--gold-light)}
              do not? Her sentences, lightly tidied. Not invented. -->
         <h2 class="title">Beauty care in Nnewi, <em>and across Anambra.</em></h2>
       </div>
-      <p data-reveal>TRICIA-V unisex salon and spa is at 40 Bishop Uzodike Rd, Nnewi, led by Vivian Udechukwu. Pedicure, manicure and nail art, facials, Moroccan radiance therapy, waxing, body treatments, hair, semi-permanent tattoos and skin consultations, all in one place.</p>
+      <p data-reveal>TRICIA-V Unisex Salon and Spa is at 40 Bishop Uzodike Rd, Nnewi, led by Vivian Udechukwu. Pedicure, manicure and nail art, facials, Moroccan radiance therapy, waxing, body treatments, hair, semi-permanent tattoos and skin consultations, all in one place.</p>
       <p data-reveal>Cannot come to us? Every service we offer can be done at your home, anywhere in Anambra. Message us on WhatsApp, tell us what you need, and we will arrange a time.</p>
       <ul class="values">
         <li data-reveal>Premium products in every treatment.</li>
@@ -580,7 +673,7 @@ footer li a:hover{color:var(--gold-light)}
           <li>Manicure</li>
           <li>Facial</li>
         </ul>
-        <a class="btn btn-line" href="https://wa.me/2348061172417?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20at%20TRICIA-V%20unisex%20salon%20and%20spa" target="_blank" rel="noopener" aria-label="Book The TRICIA-V Glow on WhatsApp">Book This Package</a>
+        <a class="btn btn-line" href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" aria-label="Book The TRICIA-V Glow on WhatsApp">Book This Package</a>
       </article>
       <article class="pkg" data-reveal>
         <h3>The Radiance Package</h3>
@@ -591,7 +684,7 @@ footer li a:hover{color:var(--gold-light)}
           <li>Skin Renewal facial</li>
           <li>Skin consultation</li>
         </ul>
-        <a class="btn btn-line" href="https://wa.me/2348061172417?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20at%20TRICIA-V%20unisex%20salon%20and%20spa" target="_blank" rel="noopener" aria-label="Book The Radiance Package on WhatsApp">Book This Package</a>
+        <a class="btn btn-line" href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" aria-label="Book The Radiance Package on WhatsApp">Book This Package</a>
       </article>
       <article class="pkg" data-reveal>
         <h3>The Full Glam</h3>
@@ -602,7 +695,7 @@ footer li a:hover{color:var(--gold-light)}
           <li>Hair styling &amp; colour</li>
           <li>Semi-permanent makeup</li>
         </ul>
-        <a class="btn btn-line" href="https://wa.me/2348061172417?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20at%20TRICIA-V%20unisex%20salon%20and%20spa" target="_blank" rel="noopener" aria-label="Book The Full Glam on WhatsApp">Book This Package</a>
+        <a class="btn btn-line" href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" aria-label="Book The Full Glam on WhatsApp">Book This Package</a>
       </article>
     </div>
   </div>
@@ -625,16 +718,17 @@ footer li a:hover{color:var(--gold-light)}
       <p class="eyebrow">Book</p>
       <h2 class="title">Ready to <em>Treat Yourself?</em></h2>
       <p class="lede">Book your appointment on WhatsApp.</p>
-      <a class="btn btn-wa" href="https://wa.me/2348061172417?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20at%20TRICIA-V%20unisex%20salon%20and%20spa" target="_blank" rel="noopener">
+      <a class="btn btn-wa" href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener">
         <svg class="ic" aria-hidden="true"><use href="#i-wa"/></svg>Chat on WhatsApp
       </a>
       <p class="book-hours">Mon-Sat, 8:00am - 9:00pm</p>
     </div>
 
+    <div class="book-info">
     <div class="contact">
       <div data-reveal>
         <svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg>
-        <p><small>Visit</small>40 Bishop Uzodike Rd,<br>Nnewi 435101, Anambra</p>
+        <p><small>Visit</small>40 Bishop Uzodike Rd,<br>Nnewi 435101, Anambra<span class="addr-note">Opposite Bishop Uzodike Foundation, Nnewichi</span></p>
       </div>
       <a href="tel:+2348061172417" data-reveal>
         <svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg>
@@ -645,9 +739,14 @@ footer li a:hover{color:var(--gold-light)}
         <p><small>Hours</small>Monday to Saturday,<br>8:00am - 9:00pm</p>
       </div>
     </div>
+    <figure class="frontage" data-reveal>
+      <div class="media"><picture><source srcset="/images/frontage-sm.webp 460w, /images/frontage.webp 800w" sizes="(max-width: 1023px) min(460px, 90vw), (max-width: 1288px) 35.7vw, 460px" type="image/webp"><img src="/images/frontage.jpg" srcset="/images/frontage-sm.jpg 460w, /images/frontage.jpg 800w" sizes="(max-width: 1023px) min(460px, 90vw), (max-width: 1288px) 35.7vw, 460px" alt="The TRICIA-V Unisex Salon and Spa shopfront on Bishop Uzodike Road, Nnewi" width="800" height="800" loading="lazy" decoding="async"></picture></div>
+      <figcaption>Look for this sign on Bishop Uzodike Road, Nnewi.</figcaption>
+    </figure>
+    </div>
 
     <div class="map" data-reveal>
-      <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3967.6613946005127!2d6.911252074988898!3d6.041113693944563!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sng!4v1791975475132!5m2!1sen!2sng" width="100%" height="320" style="border:0" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin" title="TRICIA-V unisex salon and spa location"></iframe>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3967.6613946005127!2d6.911252074988898!3d6.041113693944563!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sng!4v1791975475132!5m2!1sen!2sng" width="100%" height="320" style="border:0" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin" title="TRICIA-V Unisex Salon and Spa location"></iframe>
     </div>
   </div>
   <div style="height:clamp(96px,13vw,160px)"></div>
@@ -660,11 +759,11 @@ footer li a:hover{color:var(--gold-light)}
   <div class="wrap">
     <div class="foot-grid">
       <div class="foot-brand">
-        <a href="#" class="logo" aria-label="TRICIA-V, back to top">TRICIA-V</a>
+        <picture><source srcset="/images/logo-512.webp" type="image/webp"><img class="foot-logo" src="/images/logo-512.png" alt="TRICIA-V Unisex Salon and Spa logo" width="512" height="512" loading="lazy" decoding="async"></picture>
         <p>Your beauty, our artistry.</p>
       </div>
       <div>
-        <h4>Quick Links</h4>
+        <h3>Quick Links</h3>
         <ul>
           <li><a href="#services">Services</a></li>
           <li><a href="#gallery">Gallery</a></li>
@@ -674,7 +773,7 @@ footer li a:hover{color:var(--gold-light)}
         </ul>
       </div>
       <div>
-        <h4>Services</h4>
+        <h3>Services</h3>
         <ul>
           <li><a href="#services">Pedicure</a></li>
           <li><a href="#services">Manicure &amp; Nail Art</a></li>
@@ -684,24 +783,24 @@ footer li a:hover{color:var(--gold-light)}
         </ul>
       </div>
       <div>
-        <h4>Connect</h4>
+        <h3>Connect</h3>
         <ul>
           <li><a href="https://www.instagram.com/tricia_v_beauty_spa_and_salon_/" target="_blank" rel="noopener">Instagram</a></li>
           <li><a href="https://www.tiktok.com/@tricia_v_beauty_spa_and_salon_" target="_blank" rel="noopener">TikTok</a></li>
-          <li><a href="https://wa.me/2348061172417?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20at%20TRICIA-V%20unisex%20salon%20and%20spa" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener">WhatsApp</a></li>
           <li><a href="tel:+2348061172417">0806 117 2417</a></li>
         </ul>
       </div>
     </div>
     <div class="foot-bar">
-      <span>&copy; 2026 TRICIA-V unisex salon and spa. All rights reserved.</span>
+      <span>&copy; 2026 TRICIA-V Unisex Salon and Spa. All rights reserved.</span>
       <a href="https://ngwangwadigital.com" target="_blank" rel="noopener">Website by NgwaNgwa Digital</a>
     </div>
   </div>
 </footer>
 
 <!-- Floating WhatsApp -->
-<a class="wa-float" href="https://wa.me/2348061172417?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20at%20TRICIA-V%20unisex%20salon%20and%20spa" target="_blank" rel="noopener" aria-label="Book an appointment on WhatsApp">
+<a class="wa-float" href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" aria-label="Book an appointment on WhatsApp">
   <svg class="ic" aria-hidden="true"><use href="#i-wa"/></svg>
   <span class="wa-tip">Book an appointment</span>
 </a>
@@ -722,10 +821,11 @@ footer li a:hover{color:var(--gold-light)}
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var lenis = null;
 
-  /* Photos not supplied yet: images stay invisible until they load, so the gold placeholder box shows instead of a broken icon. */
-  document.querySelectorAll('img.hero-img, .media img').forEach(function (img) {
-    function ok() { img.classList.add('ok'); }
-    if (img.complete && img.naturalWidth > 0) ok(); else img.addEventListener('load', ok, { once: true });
+  /* If an image ever fails to load, hide the broken icon so the gold placeholder box shows. */
+  document.querySelectorAll('.media img').forEach(function (img) {
+    function hide() { img.style.visibility = 'hidden'; }
+    if (img.complete && img.naturalWidth === 0 && img.getAttribute('loading') !== 'lazy') { hide(); return; }
+    img.addEventListener('error', hide, { once: true });
   });
 
   /* ── Navbar ── */
@@ -767,7 +867,7 @@ footer li a:hover{color:var(--gold-light)}
   document.querySelectorAll('.gal-item').forEach(function (btn) {
     btn.addEventListener('click', function () {
       var img = btn.querySelector('img');
-      if (img) openLb(img.currentSrc || img.src, img.alt);
+      if (img) openLb(img.getAttribute('src'), img.alt);
     });
   });
   lb.addEventListener('click', function (e) { if (e.target !== lbImg) closeLb(); });
@@ -789,7 +889,8 @@ footer li a:hover{color:var(--gold-light)}
     /* Hero: lines rise out of a mask, then subtext and buttons settle */
     var tl = gsap.timeline({ defaults: { ease: 'power4.out' }, delay: 0.15 });
     tl.from('#heroTitle .line > span', { yPercent: 115, duration: 1.3, stagger: 0.16 })
-      .from('[data-hero]', { y: 24, opacity: 0, duration: 1, stagger: 0.12, clearProps: 'transform,opacity' }, '-=0.7');
+      .from('[data-hero]', { y: 24, opacity: 0, duration: 1, stagger: 0.12, clearProps: 'transform,opacity' }, '-=0.7')
+      .from('.hero-art .media', { y: 40, duration: 1.2, stagger: 0.14, clearProps: 'transform' }, '-=1.1');   /* y only: the LCP photo must paint immediately */
 
     /* Reveals: batched per row, fired a little before items enter the viewport */
     var items = gsap.utils.toArray('[data-reveal]');
@@ -812,6 +913,55 @@ footer li a:hover{color:var(--gold-light)}
 
     window.addEventListener('load', function () { ScrollTrigger.refresh(); });
   }
+
+  /* ── Hero cards: layered parallax. Pointer on desktop, gentle scroll on touch. Off for reduced motion. ── */
+  (function () {
+    var art = document.getElementById('heroArt');
+    if (!art || reduce) return;
+    var layers = [].slice.call(art.querySelectorAll('.layer'));
+    var fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    var tx = 0, ty = 0, cx = 0, cy = 0, raf = 0;
+    function apply() {
+      cx += (tx - cx) * 0.08; cy += (ty - cy) * 0.08;
+      layers.forEach(function (l) {
+        var d = parseFloat(l.getAttribute('data-depth')) || 0;
+        l.style.transform = 'translate3d(' + (cx * d * 22).toFixed(2) + 'px,' + (cy * d * 22).toFixed(2) + 'px,0)';
+      });
+      raf = (Math.abs(tx - cx) > 0.001 || Math.abs(ty - cy) > 0.001) ? requestAnimationFrame(apply) : 0;
+    }
+    function kick() { if (!raf) raf = requestAnimationFrame(apply); }
+    if (fine) {
+      window.addEventListener('pointermove', function (e) {
+        tx = (e.clientX / window.innerWidth - 0.5) * 2; ty = (e.clientY / window.innerHeight - 0.5) * 2; kick();
+      }, { passive: true });
+    } else {
+      window.addEventListener('scroll', function () {
+        var p = Math.min(1, Math.max(0, window.scrollY / Math.max(1, window.innerHeight)));
+        tx = 0; ty = -(p * 1.6 - 0.2); kick();
+      }, { passive: true });
+    }
+  })();
+
+  /* ── About video: only load when near the viewport; poster only for reduced motion ── */
+  (function () {
+    var v = document.getElementById('aboutVideo');
+    if (!v) return;
+    v.muted = true;
+    if (reduce) { v.removeAttribute('autoplay'); return; }
+    if (!('IntersectionObserver' in window)) return;
+    var loaded = false;
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          if (!loaded) {
+            [].slice.call(v.querySelectorAll('source')).forEach(function (src) { src.src = src.getAttribute('data-src'); });
+            v.load(); loaded = true;
+          }
+          var pr = v.play(); if (pr && pr.catch) pr.catch(function () {});
+        } else if (loaded) { v.pause(); }
+      });
+    }, { rootMargin: '300px 0px' }).observe(v);
+  })();
 
   /* ── Anchor links (Lenis-aware) ── */
   document.querySelectorAll('a[href^="#"]').forEach(function (a) {
@@ -841,7 +991,7 @@ footer li a:hover{color:var(--gold-light)}
           - canonical link
           - og:url, og:image
           - twitter:image
-          - JSON-LD "url" and "image"
+          - JSON-LD "url", "image" and "logo"
           - sitemap.xml <loc>
           - robots.txt Sitemap line
      2. DELETE the <meta name="robots" content="noindex,
