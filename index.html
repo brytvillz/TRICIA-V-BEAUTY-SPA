@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
 <title>TRICIA-V Unisex Salon and Spa | Pedicure, Nails &amp; Spa in Nnewi Anambra</title>
 <meta name="description" content="TRICIA-V Unisex Salon and Spa - premium pedicure, manicure, facials, barbing, Moroccan radiance therapy, semi-permanent tattoos and home services in Nnewi, Anambra. Book on WhatsApp.">
 <meta name="theme-color" content="#0A0A0A">
@@ -234,6 +235,11 @@ h1 .gold{color:var(--gold-light);font-style:italic}
 .svc .dm::after{content:"";width:22px;height:1px;background:currentColor;transition:width .3s}
 .svc:hover .dm::after{width:36px}
 .svc .dm::before{content:"";position:absolute;inset:0}
+.svc{scroll-margin-top:calc(var(--nav-h) + 24px)}
+.svc.featured{border-color:rgba(201,168,76,.45);border-top:2px solid var(--gold)}
+.svc .tag{position:absolute;top:20px;right:22px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);font-weight:500;pointer-events:none}
+.svc.flash{animation:flash 1.8s ease-out}
+@keyframes flash{0%{box-shadow:0 0 0 1px var(--gold),0 0 40px rgba(201,168,76,.45)}100%{box-shadow:0 0 0 0 transparent,0 0 0 transparent}}
 
 /* ───────── GALLERY ───────── */
 .gal-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px}
@@ -496,109 +502,110 @@ footer li a:hover{color:var(--gold-light)}
       <h2 class="title">Every treatment, <em>crafted for you.</em></h2>
     </div>
     <div class="svc-grid">
-      <article class="svc" data-reveal>
+      <article class="svc featured" id="svc-teeth-whitening" data-reveal>
+        <span class="tag">Featured</span>
+        <svg class="ic" aria-hidden="true"><use href="#i-teeth"/></svg>
+        <h3>Teeth Whitening, Scaling and Polishing</h3>
+        <p>Scaling, polishing and whitening for a cleaner, brighter smile.</p>
+        <a class="dm" href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" aria-label="Teeth whitening, scaling and polishing: DM to book on WhatsApp">DM to book</a>
+      </article>
+      <article class="svc" id="svc-pedicure" data-reveal>
         <svg class="ic" aria-hidden="true"><use href="#i-pedicure"/></svg>
         <h3>Pedicure</h3>
         <p>Classic, spa and luxury pedicures, from a simple tidy-up to a full indulgence.</p>
         <a class="dm" href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" aria-label="Pedicure: DM to book on WhatsApp">DM to book</a>
       </article>
-      <article class="svc" data-reveal>
+      <article class="svc" id="svc-manicure-nail-art" data-reveal>
         <svg class="ic" aria-hidden="true"><use href="#i-manicure"/></svg>
         <h3>Manicure &amp; Nail Art</h3>
         <p>Classic and gel manicures, acrylics and all types of nail designs, made around you.</p>
         <a class="dm" href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" aria-label="Manicure and Nail Art: DM to book on WhatsApp">DM to book</a>
       </article>
-      <article class="svc" data-reveal>
+      <article class="svc" id="svc-facials" data-reveal>
         <svg class="ic" aria-hidden="true"><use href="#i-facial"/></svg>
         <h3>Facials &amp; Skin Renewal</h3>
         <p>All types of facials, including acne, hyperpigmentation and vampire facials, chosen to suit your skin.</p>
         <a class="dm" href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" aria-label="Facials and Skin Renewal: DM to book on WhatsApp">DM to book</a>
       </article>
-      <article class="svc" data-reveal>
+      <article class="svc" id="svc-moroccan-radiance" data-reveal>
         <svg class="ic" aria-hidden="true"><use href="#i-radiance"/></svg>
         <h3>Moroccan Radiance Therapy</h3>
         <p>A Moroccan-inspired treatment for skin that looks rested and glowing.</p>
         <a class="dm" href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" aria-label="Moroccan Radiance Therapy: DM to book on WhatsApp">DM to book</a>
       </article>
-      <article class="svc" data-reveal>
+      <article class="svc" id="svc-waxing" data-reveal>
         <svg class="ic" aria-hidden="true"><use href="#i-wax"/></svg>
         <h3>Waxing &amp; Hair Removal</h3>
         <p>Careful, clean hair removal for a smooth finish.</p>
         <a class="dm" href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" aria-label="Waxing and Hair Removal: DM to book on WhatsApp">DM to book</a>
       </article>
-      <article class="svc" data-reveal>
+      <article class="svc" id="svc-spa-body" data-reveal>
         <svg class="ic" aria-hidden="true"><use href="#i-body"/></svg>
         <h3>Spa Body Treatments</h3>
         <p>Slow, restorative body treatments to switch off and unwind.</p>
         <a class="dm" href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" aria-label="Spa Body Treatments: DM to book on WhatsApp">DM to book</a>
       </article>
-      <article class="svc" data-reveal>
+      <article class="svc" id="svc-hair-styling" data-reveal>
         <svg class="ic" aria-hidden="true"><use href="#i-hair"/></svg>
         <h3>Hair Styling &amp; Colour</h3>
         <p>Styling, tint and colouring for women and men, for everyday looks and special occasions.</p>
         <a class="dm" href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" aria-label="Hair Styling and Colour: DM to book on WhatsApp">DM to book</a>
       </article>
-      <article class="svc" data-reveal>
+      <article class="svc" id="svc-barbing" data-reveal>
         <svg class="ic" aria-hidden="true"><use href="#i-barber"/></svg>
         <h3>Barbing</h3>
         <p>Haircuts and beard grooming for men, sharp and well finished.</p>
         <a class="dm" href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" aria-label="Barbing: DM to book on WhatsApp">DM to book</a>
       </article>
-      <article class="svc" data-reveal>
+      <article class="svc" id="svc-braids-locs" data-reveal>
         <svg class="ic" aria-hidden="true"><use href="#i-braid"/></svg>
         <h3>Braids &amp; Locs</h3>
         <p>Braids and locs, styled and maintained.</p>
         <a class="dm" href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" aria-label="Braids and Locs: DM to book on WhatsApp">DM to book</a>
       </article>
-      <article class="svc" data-reveal>
+      <article class="svc" id="svc-wig-revamping" data-reveal>
         <svg class="ic" aria-hidden="true"><use href="#i-wig"/></svg>
         <h3>Wig Revamping</h3>
         <p>Washing, restyling and refreshing your wigs.</p>
         <a class="dm" href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" aria-label="Wig Revamping: DM to book on WhatsApp">DM to book</a>
       </article>
-      <article class="svc" data-reveal>
+      <article class="svc" id="svc-lash-extensions" data-reveal>
         <svg class="ic" aria-hidden="true"><use href="#i-lash"/></svg>
         <h3>Lash Extensions</h3>
         <p>Lash extensions for a fuller, defined look.</p>
         <a class="dm" href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" aria-label="Lash Extensions: DM to book on WhatsApp">DM to book</a>
       </article>
-      <article class="svc" data-reveal>
+      <article class="svc" id="svc-microblading" data-reveal>
         <svg class="ic" aria-hidden="true"><use href="#i-brow"/></svg>
         <h3>Microblading</h3>
         <p>Hair-stroke brows for a natural, defined shape.</p>
         <a class="dm" href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" aria-label="Microblading: DM to book on WhatsApp">DM to book</a>
       </article>
-      <article class="svc" data-reveal>
+      <article class="svc" id="svc-tattoos" data-reveal>
         <svg class="ic" aria-hidden="true"><use href="#i-tattoo"/></svg>
-        <h3>Tattoos</h3>
+        <h3>Tattoos, Permanent and <span style="white-space:nowrap">Semi-Permanent</span></h3>
         <p>Semi-permanent brows, eyeliner, lip blush, and body designs.</p>
-        <a class="dm" href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" aria-label="Tattoos: DM to book on WhatsApp">DM to book</a>
+        <a class="dm" href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" aria-label="Tattoos, permanent and semi-permanent: DM to book on WhatsApp">DM to book</a>
       </article>
-      <article class="svc" data-reveal>
+      <article class="svc" id="svc-piercing" data-reveal>
         <svg class="ic" aria-hidden="true"><use href="#i-pierce"/></svg>
         <h3>Piercing</h3>
         <p>Piercing, done with care.</p>
         <a class="dm" href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" aria-label="Piercing: DM to book on WhatsApp">DM to book</a>
       </article>
-      <article class="svc" data-reveal>
-        <svg class="ic" aria-hidden="true"><use href="#i-teeth"/></svg>
-        <h3>Teeth Care</h3>
-        <p>Scaling, polishing and whitening for a cleaner, brighter smile.</p>
-        <a class="dm" href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" aria-label="Teeth Care: DM to book on WhatsApp">DM to book</a>
-      </article>
-      <article class="svc" data-reveal>
+      <article class="svc" id="svc-massage" data-reveal>
         <svg class="ic" aria-hidden="true"><use href="#i-massage"/></svg>
         <h3>Massage</h3>
         <p>Massage to release tension and help you relax.</p>
         <a class="dm" href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" aria-label="Massage: DM to book on WhatsApp">DM to book</a>
       </article>
-      <article class="svc" data-reveal>
+      <article class="svc" id="svc-skin-consultation" data-reveal>
         <svg class="ic" aria-hidden="true"><use href="#i-consult"/></svg>
         <h3>Skin Consultation</h3>
         <p>Talk through your skin with us and leave knowing which treatment is right for you.</p>
         <a class="dm" href="https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" aria-label="Skin Consultation: DM to book on WhatsApp">DM to book</a>
       </article>
-      <article class="svc" data-reveal>
+      <article class="svc" id="svc-home-services" data-reveal>
         <svg class="ic" aria-hidden="true"><use href="#i-home"/></svg>
         <h3>Home Services</h3>
         <p>Most of our treatments, at your home. Message us on WhatsApp to check which ones we can bring to you.</p>
@@ -627,6 +634,15 @@ footer li a:hover{color:var(--gold-light)}
       <button type="button" class="gal-item media" data-reveal aria-label="Open photo: Eyelash extensions being applied at TRICIA-V"><picture><source srcset="/images/gallery-07-sm.webp 450w, /images/gallery-07.webp 900w" sizes="(max-width: 1023px) calc(45vw - 6px), (max-width: 1440px) calc(30vw - 11px), 435px" type="image/webp"><img src="/images/gallery-07.jpg" srcset="/images/gallery-07-sm.jpg 450w, /images/gallery-07.jpg 900w" sizes="(max-width: 1023px) calc(45vw - 6px), (max-width: 1440px) calc(30vw - 11px), 435px" alt="Eyelash extensions being applied at TRICIA-V" width="900" height="900" loading="lazy" decoding="async"></picture></button>
       <button type="button" class="gal-item media" data-reveal aria-label="Open photo: Winged dollar-sign tattoo on a client&#39;s shoulder"><picture><source srcset="/images/gallery-08-sm.webp 450w, /images/gallery-08.webp 900w" sizes="(max-width: 1023px) calc(45vw - 6px), (max-width: 1440px) calc(30vw - 11px), 435px" type="image/webp"><img src="/images/gallery-08.jpg" srcset="/images/gallery-08-sm.jpg 450w, /images/gallery-08.jpg 900w" sizes="(max-width: 1023px) calc(45vw - 6px), (max-width: 1440px) calc(30vw - 11px), 435px" alt="Winged dollar-sign tattoo on a client&#39;s shoulder" width="900" height="900" loading="lazy" decoding="async"></picture></button>
       <button type="button" class="gal-item media" data-reveal aria-label="Open photo: Men&#39;s facial with a high-frequency wand"><picture><source srcset="/images/gallery-09-sm.webp 450w, /images/gallery-09.webp 900w" sizes="(max-width: 1023px) calc(45vw - 6px), (max-width: 1440px) calc(30vw - 11px), 435px" type="image/webp"><img src="/images/gallery-09.jpg" srcset="/images/gallery-09-sm.jpg 450w, /images/gallery-09.jpg 900w" sizes="(max-width: 1023px) calc(45vw - 6px), (max-width: 1440px) calc(30vw - 11px), 435px" alt="Men&#39;s facial with a high-frequency wand" width="900" height="900" loading="lazy" decoding="async"></picture></button>
+      <!-- STAGED: TEETH WHITENING PHOTOS (2 or 3). Uncomment the buttons below once the files exist in /images/.
+           Kept commented so the live page does not request files that are not there yet (404s).
+           Files per photo, all 1:1 square:  teeth-01.jpg + teeth-01.webp (900x900),
+                                              teeth-01-sm.jpg + teeth-01-sm.webp (450x450).
+           Then teeth-02 and teeth-03 the same way. If only two photos arrive, delete the third button.
+      <button type="button" class="gal-item media" data-reveal aria-label="Open photo: Teeth whitening at TRICIA-V"><picture><source srcset="/images/teeth-01-sm.webp 450w, /images/teeth-01.webp 900w" sizes="(max-width: 1023px) calc(45vw - 6px), (max-width: 1440px) calc(30vw - 11px), 435px" type="image/webp"><img src="/images/teeth-01.jpg" srcset="/images/teeth-01-sm.jpg 450w, /images/teeth-01.jpg 900w" sizes="(max-width: 1023px) calc(45vw - 6px), (max-width: 1440px) calc(30vw - 11px), 435px" alt="Teeth whitening at TRICIA-V" width="900" height="900" loading="lazy" decoding="async"></picture></button>
+      <button type="button" class="gal-item media" data-reveal aria-label="Open photo: Teeth whitening at TRICIA-V"><picture><source srcset="/images/teeth-02-sm.webp 450w, /images/teeth-02.webp 900w" sizes="(max-width: 1023px) calc(45vw - 6px), (max-width: 1440px) calc(30vw - 11px), 435px" type="image/webp"><img src="/images/teeth-02.jpg" srcset="/images/teeth-02-sm.jpg 450w, /images/teeth-02.jpg 900w" sizes="(max-width: 1023px) calc(45vw - 6px), (max-width: 1440px) calc(30vw - 11px), 435px" alt="Teeth whitening at TRICIA-V" width="900" height="900" loading="lazy" decoding="async"></picture></button>
+      <button type="button" class="gal-item media" data-reveal aria-label="Open photo: Teeth whitening at TRICIA-V"><picture><source srcset="/images/teeth-03-sm.webp 450w, /images/teeth-03.webp 900w" sizes="(max-width: 1023px) calc(45vw - 6px), (max-width: 1440px) calc(30vw - 11px), 435px" type="image/webp"><img src="/images/teeth-03.jpg" srcset="/images/teeth-03-sm.jpg 450w, /images/teeth-03.jpg 900w" sizes="(max-width: 1023px) calc(45vw - 6px), (max-width: 1440px) calc(30vw - 11px), 435px" alt="Teeth whitening at TRICIA-V" width="900" height="900" loading="lazy" decoding="async"></picture></button>
+      -->
     </div>
   </div>
 </section>
@@ -780,11 +796,13 @@ footer li a:hover{color:var(--gold-light)}
       <div>
         <h3>Services</h3>
         <ul>
-          <li><a href="#services">Pedicure</a></li>
-          <li><a href="#services">Manicure &amp; Nail Art</a></li>
-          <li><a href="#services">Facials &amp; Skin Renewal</a></li>
-          <li><a href="#services">Moroccan Radiance Therapy</a></li>
-          <li><a href="#services">Home Services</a></li>
+          <li><a href="#svc-teeth-whitening">Teeth Whitening &amp; Scaling</a></li>
+          <li><a href="#svc-pedicure">Pedicure</a></li>
+          <li><a href="#svc-manicure-nail-art">Manicure &amp; Nail Art</a></li>
+          <li><a href="#svc-facials">Facials &amp; Skin Renewal</a></li>
+          <li><a href="#svc-microblading">Microblading</a></li>
+          <li><a href="#svc-moroccan-radiance">Moroccan Radiance Therapy</a></li>
+          <li><a href="#svc-home-services">Home Services</a></li>
         </ul>
       </div>
       <div>
@@ -975,6 +993,7 @@ footer li a:hover{color:var(--gold-light)}
       var target = href === '#' ? document.body : document.querySelector(href);
       if (!target) return;
       e.preventDefault();
+      if (target.classList && target.classList.contains('svc')) { target.classList.remove('flash'); void target.offsetWidth; target.classList.add('flash'); }
       var wasOpen = burger.getAttribute('aria-expanded') === 'true';
       if (wasOpen) setMenu(false);
       var top = href === '#' ? 0 : target;
@@ -991,7 +1010,9 @@ footer li a:hover{color:var(--gold-light)}
 </body>
 </html>
 <!-- GO LIVE CHECKLIST - when the real domain is attached:
-     1. Replace every https://tricia-v.vercel.app with the
+     1. DELETE the <meta name="robots" content="noindex, nofollow">
+        tag in the <head>. Until this is removed the site is not indexed.
+     2. Replace every https://tricia-v.vercel.app with the
         real domain. It appears in:
           - canonical link
           - og:url, og:image
@@ -999,7 +1020,6 @@ footer li a:hover{color:var(--gold-light)}
           - JSON-LD "url", "image" and "logo"
           - sitemap.xml <loc>
           - robots.txt Sitemap line
-     2. Submit the new domain in Google Search Console, and set up a
-        301 redirect from tricia-v.vercel.app to the new domain so the
-        two do not compete for the same business name.
+     3. Submit the new domain in Google Search Console, and set up a
+        301 redirect from tricia-v.vercel.app to the new domain.
 -->
