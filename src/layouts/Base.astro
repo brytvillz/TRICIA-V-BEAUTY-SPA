@@ -1,0 +1,103 @@
+---
+import '../styles/global.css';
+import themeInit from '../scripts/theme-init.js?raw';
+import Icons from '../components/Icons.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
+import { SITE, NAME, PHONE_E164, INSTAGRAM, TIKTOK, GOOGLE_PROFILE, GSC_TOKEN, DEFAULT_TITLE, DEFAULT_DESCRIPTION } from '../lib/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** site-relative path of this page, e.g. "/" or "/dental-care" */
+  path?: string;
+  ogImage?: string;
+  /** false for the 404 page: no canonical or og:url */
+  indexable?: boolean;
+  /** the home page keeps its original, shorter Twitter description */
+  twitterDescription?: string;
+}
+const { title = DEFAULT_TITLE, description = DEFAULT_DESCRIPTION, path = '/', ogImage = '/og-image.jpg', indexable = true, twitterDescription } = Astro.props;
+const canonical = SITE + path;
+const ogUrl = SITE + ogImage;
+const FONTS = 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500;600&display=swap';
+
+const salon = {
+  '@context': 'https://schema.org',
+  '@type': 'BeautySalon',
+  '@id': `${SITE}/#salon`,
+  name: NAME,
+  image: `${SITE}/og-image.jpg`,
+  logo: `${SITE}/images/logo-512.png`,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '40 Bishop Uzodike Rd',
+    addressLocality: 'Nnewi',
+    addressRegion: 'Anambra',
+    postalCode: '435101',
+    addressCountry: 'NG',
+  },
+  telephone: PHONE_E164,
+  url: SITE,
+  priceRange: '$$',
+  openingHoursSpecification: [{
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    opens: '08:00',
+    closes: '21:00',
+  }],
+  sameAs: [INSTAGRAM, TIKTOK, GOOGLE_PROFILE],
+};
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="theme-color" content="#FBF8F2" />
+  <script is:inline set:html={themeInit.trim()}></script>
+  <meta name="google-site-verification" content={GSC_TOKEN} />
+  {indexable && <link rel="canonical" href={canonical} />}
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content={NAME} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  {indexable && <meta property="og:url" content={canonical} />}
+  <meta property="og:image" content={ogUrl} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={twitterDescription ?? description} />
+  <meta name="twitter:image" content={ogUrl} />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href={FONTS} media="print" data-fonts />
+  <noscript><link rel="stylesheet" href={FONTS} /></noscript>
+
+  <slot name="head" />
+  <script type="application/ld+json" set:html={JSON.stringify(salon)}></script>
+  <slot name="jsonld" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <Icons />
+  <Header path={path} />
+  <main id="main"><slot /></main>
+  <Footer />
+  <WhatsAppButton />
+  <script>
+    import '../scripts/site.js';
+  </script>
+</body>
+</html>

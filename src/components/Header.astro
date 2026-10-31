@@ -1,0 +1,39 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+import { getCollection } from 'astro:content';
+import { wa } from '../lib/site';
+
+interface Props { path?: string }
+const { path = '/' } = Astro.props;
+const pages = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
+const onService = pages.some((p) => '/' + p.data.slug === path);
+---
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a href="/" class="brand" aria-label="TRICIA-V, home">
+      <picture><source srcset="/images/logo-mark-192.webp" type="image/webp" /><img class="brand-mark" src="/images/logo-mark-192.png" alt="" width="192" height="192" decoding="async" /></picture>
+      <span class="logo">TRICIA-V</span>
+    </a>
+    <nav class="nav-links" id="navLinks" aria-label="Main">
+      <a href="/" aria-current={path === '/' ? 'page' : undefined}>Home</a>
+      <div class="has-menu" id="svcMenu">
+        <button type="button" class="menu-btn" id="svcMenuBtn" aria-expanded="false" aria-controls="svcSubmenu" aria-haspopup="true">
+          Services
+          <svg class="ic" aria-hidden="true"><use href="#i-chevron" /></svg>
+        </button>
+        <ul class="submenu" id="svcSubmenu">
+          {pages.map((p) => (
+            <li><a href={'/' + p.data.slug} aria-current={path === '/' + p.data.slug ? 'page' : undefined}>{p.data.navLabel}</a></li>
+          ))}
+        </ul>
+      </div>
+      <a href="/#gallery">Gallery</a>
+      <a href="/#about">About</a>
+      <a href={wa()} class="btn btn-fill" target="_blank" rel="noopener">Book Now</a>
+    </nav>
+    <div class="nav-actions">
+      <ThemeToggle />
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>

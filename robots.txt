@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://tricia-v.vercel.app/sitemap.xml
