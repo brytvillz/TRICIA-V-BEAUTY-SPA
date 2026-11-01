@@ -60,7 +60,7 @@
 
 /* ───────── BASE ───────── */
 *, *::before, *::after { box-sizing: border-box }
-html { -webkit-text-size-adjust: 100%; scroll-padding-top: var(--nav-h) }
+html { -webkit-text-size-adjust: 100% }
 html.lenis, html.lenis body { height: auto }
 .lenis.lenis-smooth { scroll-behavior: auto !important }
 .lenis.lenis-stopped { overflow: hidden }
@@ -374,6 +374,32 @@ footer li a:hover { color: var(--accent-text) }
 .notfound .page-h1 { margin-top: 12px }
 .notfound .btn { margin-top: 32px }
 
+
+/* ───────── MOBILE MENU PANEL (direct child of <body>) ───────── */
+.menu-panel {
+  position: fixed; inset: 0; z-index: 1000; display: none; flex-direction: column;
+  background: var(--bg); overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch;
+  /* visible instantly on open (so focus can move in), hidden only after the fade-out on close */
+  opacity: 0; visibility: hidden; transition: opacity .25s, visibility 0s linear .25s;
+}
+.menu-panel.open { opacity: 1; visibility: visible; transition: opacity .25s, visibility 0s }
+.menu-top { flex: none; height: var(--nav-h); display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-inline: var(--gutter) }
+.menu-close { width: 44px; height: 44px; display: grid; place-items: center; color: var(--accent-text) }
+.menu-close .ic { width: 28px; height: 28px }
+.menu-list { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 28px; padding: 28px 24px max(48px, env(safe-area-inset-bottom)) }
+.menu-list ul { display: grid; gap: 4px; text-align: center }
+.menu-list > ul > li > a, .menu-label { font-family: var(--serif); font-size: 32px; line-height: 1.25; color: var(--fg); display: block; padding: 6px 12px }
+.menu-label { color: var(--accent-text) }
+.menu-group ul { margin-top: 2px }
+.menu-group a { font-family: var(--sans); font-size: 19px; color: var(--fg); display: block; padding: 10px 12px }
+.menu-list a:hover, .menu-list a:focus-visible { color: var(--accent-text) }
+.menu-list .btn { padding: 15px 36px; font-size: 15px }
+/* while the menu is open: no page scroll, and the WhatsApp button is hidden */
+html.menu-open, html.menu-open body { overflow: hidden; overscroll-behavior: none }
+html.menu-open .wa-float { display: none }
+@media (min-width: 861px) { .menu-panel { display: none !important } }
+@media (max-width: 860px) { .menu-panel { display: flex } }
+
 /* ───────── RESPONSIVE ───────── */
 @media (max-width: 1023px) {
   .svc-grid { grid-template-columns: repeat(2, 1fr) }
@@ -396,20 +422,9 @@ footer li a:hover { color: var(--accent-text) }
   .page-hero .media { justify-self: start }
 }
 @media (max-width: 860px) {
-  .nav-links {
-    position: fixed; inset: 0; z-index: 101; flex-direction: column; justify-content: flex-start; align-items: center; gap: 22px;
-    padding: calc(var(--nav-h) + 24px) 24px 40px; overflow-y: auto;
-    background: var(--overlay); opacity: 0; visibility: hidden; transition: opacity .35s, visibility .35s; margin-left: 0;
-  }
-  .nav-links.open { opacity: 1; visibility: visible }
-  .nav-links > a:not(.btn), .menu-btn { font-family: var(--serif); font-size: 32px; letter-spacing: .02em }
-  .nav-links .btn { padding: 15px 36px; font-size: 15px; margin-top: 8px }
-  .has-menu { text-align: center }
-  .submenu { position: static; display: none; min-width: 0; background: transparent; border: 0; box-shadow: none; padding: 8px 0 0 }
-  .has-menu.open .submenu { display: block }
-  .submenu a { font-size: 19px; padding: 8px 12px }
+  .nav-links { display: none }
   .burger { display: block }
-  .nav-actions { position: relative; z-index: 102; margin-left: auto }
+  .nav-actions { margin-left: auto }
   .about-grid { grid-template-columns: 1fr }
   .about-img { max-width: 420px }
 }

@@ -1,7 +1,8 @@
 ---
-/* 44px round theme switch. site.js saves the choice and keeps the label and theme-color in sync. */
+/* 44px round theme switch. site.js saves the choice and keeps the label and theme-color in sync.
+   Used in the header and in the mobile menu, so it is found by data attribute, not id. */
 ---
-<button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode">
+<button type="button" class="theme-toggle" data-theme-toggle aria-label="Switch to dark mode">
   <svg class="ic i-moon" aria-hidden="true"><use href="#i-moon" /></svg>
   <svg class="ic i-sun" aria-hidden="true"><use href="#i-sun" /></svg>
 </button>

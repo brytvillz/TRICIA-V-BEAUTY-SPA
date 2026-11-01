@@ -5,6 +5,7 @@ import Icons from '../components/Icons.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
+import MobileMenu from '../components/MobileMenu.astro';
 import { SITE, NAME, PHONE_E164, INSTAGRAM, TIKTOK, GOOGLE_PROFILE, GSC_TOKEN, DEFAULT_TITLE, DEFAULT_DESCRIPTION } from '../lib/site';
 
 interface Props {
@@ -93,6 +94,7 @@ const salon = {
   <a class="skip" href="#main">Skip to content</a>
   <Icons />
   <Header path={path} />
+  <MobileMenu />
   <main id="main"><slot /></main>
   <Footer />
   <WhatsAppButton />

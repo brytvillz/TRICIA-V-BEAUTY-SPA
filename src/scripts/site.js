@@ -13,19 +13,59 @@ function onScroll() { if (nav) nav.classList.toggle('scrolled', window.scrollY >
 window.addEventListener('scroll', onScroll, { passive: true });
 onScroll();
 
-/* ── Mobile menu ── */
+/* ── Mobile menu: a full-screen panel that lives directly under <body> ── */
 const burger = $('#burger');
-const links = $('#navLinks');
-function setMenu(open) {
-  if (!burger || !links) return;
-  burger.setAttribute('aria-expanded', open ? 'true' : 'false');
-  burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-  links.classList.toggle('open', open);
-  root.style.overflow = open ? 'hidden' : '';
-  if (lenis) { open ? lenis.stop() : lenis.start(); }
+const panel = $('#menuPanel');
+const menuClose = $('#menuClose');
+const pageParts = () => ['#nav', '#main', 'footer', '.wa-float', '#lb'].map((q) => $(q)).filter(Boolean);
+function menuIsOpen() { return !!panel && panel.classList.contains('open'); }
+function openMenu() {
+  if (!panel || menuIsOpen()) return;
+  panel.removeAttribute('inert');
+  pageParts().forEach((el) => el.setAttribute('inert', ''));   // page behind is not focusable or readable
+  panel.classList.add('open');
+  root.classList.add('menu-open');                               // locks page scroll, hides the WhatsApp button
+  burger.setAttribute('aria-expanded', 'true');
+  burger.setAttribute('aria-label', 'Close menu');
+  if (lenis) lenis.stop();
+  // the panel was visibility:hidden a moment ago: flush styles so the close button is focusable (WebKit)
+  void panel.offsetWidth;
+  menuClose.focus();
+  if (!panel.contains(document.activeElement)) requestAnimationFrame(() => menuClose.focus());
 }
-if (burger) burger.addEventListener('click', () => setMenu(burger.getAttribute('aria-expanded') !== 'true'));
-if (links) links.addEventListener('click', (e) => { if (e.target.closest('a') && burger && burger.getAttribute('aria-expanded') === 'true') setMenu(false); });
+function closeMenu(restoreFocus = true) {
+  if (!panel || !menuIsOpen()) return;
+  panel.classList.remove('open');
+  panel.setAttribute('inert', '');
+  pageParts().forEach((el) => el.removeAttribute('inert'));
+  root.classList.remove('menu-open');
+  burger.setAttribute('aria-expanded', 'false');
+  burger.setAttribute('aria-label', 'Open menu');
+  if (lenis) lenis.start();
+  if (restoreFocus) burger.focus();
+}
+if (burger && panel) {
+  burger.addEventListener('click', openMenu);
+  menuClose.addEventListener('click', () => closeMenu());
+  // tapping any link closes the menu (the page then scrolls or navigates)
+  panel.addEventListener('click', (e) => { if (e.target.closest('a')) closeMenu(false); });
+  // keep keyboard focus inside the menu while it is open
+  panel.addEventListener('keydown', (e) => {
+    if (e.key !== 'Tab') return;
+    const f = [...panel.querySelectorAll('a[href], button:not([disabled])')].filter((el) => el.getClientRects().length);
+    if (!f.length) return;
+    const first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+  // Safari skips links when tabbing, so the check above can be bypassed: if focus ever lands outside, pull it back in
+  panel.addEventListener('focusout', (e) => {
+    if (!menuIsOpen() || (e.relatedTarget && panel.contains(e.relatedTarget))) return;
+    setTimeout(() => { if (menuIsOpen() && !panel.contains(document.activeElement)) menuClose.focus(); }, 0);
+  });
+  window.addEventListener('resize', () => { if (window.innerWidth > 860) closeMenu(false); });
+  window.addEventListener('pageshow', () => closeMenu(false));  // back/forward cache: never come back with it open
+}
 
 /* ── Services menu (button + list, works by keyboard and touch) ── */
 const menu = $('#svcMenu');
@@ -51,25 +91,23 @@ if (menu && menuBtn) {
   document.addEventListener('click', (e) => { if (!menu.contains(e.target)) setSub(false); });
 }
 
-/* ── Theme toggle ── */
-const toggle = $('#themeToggle');
+/* ── Theme toggle (one in the header, one in the mobile menu) ── */
+const toggles = [...document.querySelectorAll('[data-theme-toggle]')];
 function syncThemeUi() {
   const dark = root.getAttribute('data-theme') === 'dark';
-  if (toggle) toggle.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+  toggles.forEach((t) => t.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode'));
   const m = document.querySelector('meta[name="theme-color"]');
   if (m) m.setAttribute('content', dark ? '#0B0A09' : '#FBF8F2');
 }
 syncThemeUi();
-if (toggle) {
-  toggle.addEventListener('click', () => {
-    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    root.classList.add('theme-anim');
-    root.setAttribute('data-theme', next);
-    try { localStorage.setItem('theme', next); } catch (e) { /* storage blocked: choice lasts for this visit */ }
-    syncThemeUi();
-    setTimeout(() => root.classList.remove('theme-anim'), 400);
-  });
-}
+toggles.forEach((t) => t.addEventListener('click', () => {
+  const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  root.classList.add('theme-anim');
+  root.setAttribute('data-theme', next);
+  try { localStorage.setItem('theme', next); } catch (e) { /* storage blocked: choice lasts for this visit */ }
+  syncThemeUi();
+  setTimeout(() => root.classList.remove('theme-anim'), 400);
+}));
 
 /* ── Open / closed status (Africa/Lagos) ── */
 const status = $('#status');
@@ -153,7 +191,7 @@ if (lb) {
 }
 document.addEventListener('keydown', (e) => {
   if (e.key !== 'Escape') return;
-  if (burger && burger.getAttribute('aria-expanded') === 'true') setMenu(false);
+  if (menuIsOpen()) { closeMenu(); return; }
   if (menu && menu.classList.contains('open')) { setSub(false); if (menuBtn) menuBtn.focus(); }
 });
 
@@ -167,8 +205,8 @@ document.addEventListener('click', (e) => {
   if (!target) return;
   e.preventDefault();
   if (target.classList && target.classList.contains('svc')) { target.classList.remove('flash'); void target.offsetWidth; target.classList.add('flash'); }
-  const navH = parseInt(getComputedStyle(root).getPropertyValue('--nav-h'), 10) || 76;
-  if (lenis) lenis.scrollTo(target, { offset: -navH + 1 });
+  // header clearance comes from the scroll-margin-top on sections and cards (honoured by Lenis and by scrollIntoView)
+  if (lenis) lenis.scrollTo(target);
   else target.scrollIntoView({ behavior: 'auto', block: 'start' });
   history.replaceState(null, '', u.hash);
 });
