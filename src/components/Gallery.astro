@@ -1,0 +1,27 @@
+---
+import Picture from './Picture.astro';
+import { gallery } from '../data/home';
+import { SIZES } from '../lib/images';
+---
+<section class="sec" id="gallery">
+  <div class="wrap">
+    <div class="gal-head" data-reveal>
+      <div>
+        <p class="eyebrow">Our Work</p>
+        <h2 class="title">See it <em>for yourself.</em></h2>
+      </div>
+    </div>
+    <div class="gal-grid">
+      {gallery.map((g) => (
+        <button type="button" class="gal-item media" data-reveal aria-label={`Open photo: ${g.alt}`}>
+          <Picture name={g.name} alt={g.alt} sizes={SIZES.gallery} />
+        </button>
+      ))}
+    </div>
+  </div>
+</section>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button type="button" class="lb-close" id="lbClose" aria-label="Close photo"><svg class="ic" aria-hidden="true"><use href="#i-close" /></svg></button>
+  <img id="lbImg" src="" alt="" />
+</div>

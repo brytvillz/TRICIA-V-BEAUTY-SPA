@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+import { wa } from '../lib/site';
+---
+<Base title="Page not found | TRICIA-V Unisex Salon and Spa" description="This page could not be found. Go back to the TRICIA-V Unisex Salon and Spa home page or book on WhatsApp." path="/404" indexable={false}>
+  <section class="notfound">
+    <div>
+      <p class="eyebrow" style="justify-content:center">Error 404</p>
+      <h1 class="page-h1">That page is not here.</h1>
+      <p class="tagline" style="margin-inline:auto">The link may be old, or the address may have a typo. You can head back home or message us on WhatsApp.</p>
+      <div class="hero-cta" style="justify-content:center">
+        <a class="btn btn-fill" href="/">Back to home</a>
+        <a class="btn btn-line" href={wa()} target="_blank" rel="noopener">Book on WhatsApp</a>
+      </div>
+    </div>
+  </section>
+</Base>

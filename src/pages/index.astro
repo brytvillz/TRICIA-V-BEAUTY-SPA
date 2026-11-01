@@ -1,0 +1,174 @@
+---
+import Base from '../layouts/Base.astro';
+import Picture from '../components/Picture.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import Gallery from '../components/Gallery.astro';
+import MapEmbed from '../components/MapEmbed.astro';
+import { homeServices, packages, ticker } from '../data/home';
+import { SIZES } from '../lib/images';
+import { wa, PHONE_E164, PHONE_DISPLAY } from '../lib/site';
+---
+<Base path="/" twitterDescription="Premium pedicure, manicure, facials, barbing, dental care, Moroccan radiance therapy, permanent and semi-permanent tattoos and home services in Nnewi, Anambra. Book on WhatsApp.">
+  <link slot="head" rel="preload" as="image" href="/images/about-poster.jpg" fetchpriority="high" />
+
+  <!-- ═════════ HERO B ═════════ -->
+  <section class="hero-b" id="top">
+    <div class="inner">
+      <div class="hero-text">
+        <h1 class="hero-label">Unisex salon and spa in Nnewi</h1>
+        <p class="display">Look good. Feel <em>cared for.</em></p>
+        <p class="sub">TRICIA-V Unisex Salon and Spa, Bishop Uzodike Road, Nnewi. Facials, nails, hair, barbing, dental care and tattoos for women and men, in the salon or at your home.</p>
+        <div class="hero-cta">
+          <a class="btn btn-fill" href={wa()} target="_blank" rel="noopener">Book on WhatsApp</a>
+          <a class="btn btn-line" href="#gallery">See our work</a>
+        </div>
+      </div>
+      <div class="arch-wrap">
+        <div class="arch">
+          <video
+            id="heroVideo"
+            poster="/images/about-poster.jpg"
+            width="576" height="720"
+            muted loop playsinline preload="none"
+            aria-label="A short tour of TRICIA-V and some of our treatments">
+            <source data-src="/videos/about-loop.webm" type="video/webm" />
+            <source data-src="/videos/about-loop.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <!-- Default works without JS; site.js replaces it with the live Lagos-time status. -->
+        <div class="status" id="status" data-state="default" aria-live="polite">
+          <span class="dot"></span>
+          <div><strong id="statusTitle">Open Mon to Sat</strong><span id="statusSub">8am to 9pm</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker" aria-label="Our services">
+    <div class="ticker-track">
+      <ul>
+        {ticker.map((t) => <li><a href={t.href}>{t.label}</a></li>)}
+      </ul>
+      <ul aria-hidden="true">
+        {ticker.map((t) => <li><a href={t.href} tabindex="-1">{t.label}</a></li>)}
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═════════ SERVICES ═════════ -->
+  <section class="sec" id="services">
+    <div class="wrap">
+      <div class="services-head" data-reveal>
+        <p class="eyebrow">Our Services</p>
+        <h2 class="title">Every treatment, <em>crafted for you.</em></h2>
+      </div>
+      <div class="svc-grid">
+        {homeServices.map((s) => (
+          <ServiceCard id={s.id} icon={s.icon} title={s.title} label={s.label} text={s.text} href={s.page} featured={s.featured} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════ GALLERY ═════════ -->
+  <Gallery />
+
+  <!-- ═════════ ABOUT ═════════ -->
+  <section class="sec" id="about">
+    <div class="wrap about-grid">
+      <div class="about-img media" data-reveal>
+        <Picture name="hero-main" alt="Therapist giving a client a cold-steam facial at TRICIA-V" sizes={SIZES.about} />
+      </div>
+      <div class="about-copy">
+        <div data-reveal>
+          <p class="eyebrow">About</p>
+          <!-- ABOUT COPY - interim copy uses confirmed facts only (no personal story).
+               Still to add from Vivian's own words, if she wants it:
+               Ask her: why did you open it? what do you want women in
+               Nnewi to stop having to do? what do you do that others here
+               do not? Her sentences, lightly tidied. Not invented. -->
+          <h2 class="title">Beauty care in Nnewi, <em>and across Anambra.</em></h2>
+        </div>
+        <p data-reveal>TRICIA-V Unisex Salon and Spa is at 40 Bishop Uzodike Rd, Nnewi, led by Vivian Udechukwu. Pedicure, manicure and nail art, facials, Moroccan radiance therapy, waxing, body treatments, hair and barbing, dental care, permanent and semi-permanent tattoos and skin consultations, all in one place.</p>
+        <p data-reveal>Cannot come to us? Most of our treatments can be done at your home, anywhere in Anambra. Message us on WhatsApp, tell us what you need, and we will arrange a time.</p>
+        <ul class="values">
+          <li data-reveal>Premium products in every treatment.</li>
+          <li data-reveal>Home service across Anambra - we come to you.</li>
+          <li data-reveal>WhatsApp replies during opening hours.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════ SIGNATURE EXPERIENCES ═════════ -->
+  <section class="sec" id="packages">
+    <div class="wrap">
+      <div class="pkg-head" data-reveal>
+        <p class="eyebrow">Signature Experiences</p>
+        <h2 class="title">Three ways to <em>treat yourself.</em></h2>
+      </div>
+      <div class="pkg-row">
+        {packages.map((p) => (
+          <article class="pkg" data-reveal>
+            <h3>{p.title}</h3>
+            <p class="what">{p.what}</p>
+            <p class="d">{p.text}</p>
+            <ul>{p.items.map((i) => <li>{i}</li>)}</ul>
+            <a class="btn btn-line" href={wa()} target="_blank" rel="noopener" aria-label={`Book This Package: ${p.title}`}>Book This Package</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <div class="testimonials-parent">
+    <section id="testimonials">
+      <!-- TESTIMONIALS
+           Paste real client quotes here only. Each needs:
+           quote text, first name + last initial, and permission.
+           Until then this section stays hidden (display:none on the
+           parent). Do not ship invented reviews. -->
+    </section>
+  </div>
+
+  <!-- ═════════ BOOK ═════════ -->
+  <section class="book" id="book">
+    <div class="wrap">
+      <div class="book-cta" data-reveal>
+        <p class="eyebrow">Book</p>
+        <h2 class="title">Ready to <em>Treat Yourself?</em></h2>
+        <p class="lede">Book your appointment on WhatsApp.</p>
+        <a class="btn btn-wa" href={wa()} target="_blank" rel="noopener">
+          <svg class="ic" aria-hidden="true"><use href="#i-wa" /></svg>Chat on WhatsApp
+        </a>
+        <p class="book-hours">Mon-Sat, 8:00am - 9:00pm</p>
+      </div>
+
+      <div class="book-info">
+        <div class="contact">
+          <div data-reveal>
+            <svg class="ic" aria-hidden="true"><use href="#i-pin" /></svg>
+            <p><small>Visit</small>40 Bishop Uzodike Rd,<br />Nnewi 435101, Anambra<span class="addr-note">Opposite Bishop Uzodike Foundation, Nnewichi</span></p>
+          </div>
+          <a href={`tel:${PHONE_E164}`} data-reveal>
+            <svg class="ic" aria-hidden="true"><use href="#i-phone" /></svg>
+            <p><small>Call</small><span>{PHONE_DISPLAY}</span></p>
+          </a>
+          <div data-reveal>
+            <svg class="ic" aria-hidden="true"><use href="#i-clock" /></svg>
+            <p><small>Hours</small>Monday to Saturday,<br />8:00am - 9:00pm</p>
+          </div>
+        </div>
+        <figure class="frontage" data-reveal>
+          <div class="media">
+            <Picture name="frontage" alt="The TRICIA-V Unisex Salon and Spa shopfront on Bishop Uzodike Road, Nnewi" sizes={SIZES.frontage} />
+          </div>
+          <figcaption>Look for this sign on Bishop Uzodike Road, Nnewi.</figcaption>
+        </figure>
+      </div>
+
+      <MapEmbed />
+    </div>
+    <div style="height:clamp(96px,13vw,160px)"></div>
+  </section>
+</Base>

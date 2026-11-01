@@ -1,0 +1,44 @@
+---
+import { getCollection } from 'astro:content';
+import { wa, INSTAGRAM, TIKTOK, PHONE_E164, PHONE_DISPLAY } from '../lib/site';
+const pages = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
+---
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <picture><source srcset="/images/logo-512.webp" type="image/webp" /><img class="foot-logo" src="/images/logo-512.png" alt="TRICIA-V Unisex Salon and Spa logo" width="512" height="512" loading="lazy" decoding="async" /></picture>
+        <p>Your beauty, our artistry.</p>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="/#services">Services</a></li>
+          <li><a href="/#gallery">Gallery</a></li>
+          <li><a href="/#about">About</a></li>
+          <li><a href="/#packages">Signature Experiences</a></li>
+          <li><a href="/#book">Book</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Services</h3>
+        <ul>
+          {pages.map((p) => <li><a href={'/' + p.data.slug}>{p.data.navLabel}</a></li>)}
+        </ul>
+      </div>
+      <div>
+        <h3>Connect</h3>
+        <ul>
+          <li><a href={INSTAGRAM} target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href={TIKTOK} target="_blank" rel="noopener">TikTok</a></li>
+          <li><a href={wa()} target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a href={`tel:${PHONE_E164}`}>{PHONE_DISPLAY}</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bar">
+      <span>&copy; 2026 TRICIA-V Unisex Salon and Spa. All rights reserved.</span>
+      <a href="https://ngwangwadigital.com" target="_blank" rel="noopener">Website by NgwaNgwa Digital</a>
+    </div>
+  </div>
+</footer>

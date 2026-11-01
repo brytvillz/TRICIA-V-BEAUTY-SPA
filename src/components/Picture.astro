@@ -1,0 +1,30 @@
+---
+import { imageInfo } from '../lib/images';
+
+interface Props {
+  name: string;
+  alt: string;
+  sizes: string;
+  /** eager = above the fold (no lazy loading); high = fetchpriority="high" */
+  eager?: boolean;
+  high?: boolean;
+  class?: string;
+}
+const { name, alt, sizes, eager = false, high = false, class: cls } = Astro.props;
+const { w, h, sm } = imageInfo(name);
+---
+<picture>
+  <source srcset={`/images/${name}-sm.webp ${sm}w, /images/${name}.webp ${w}w`} sizes={sizes} type="image/webp" />
+  <img
+    class={cls}
+    src={`/images/${name}.jpg`}
+    srcset={`/images/${name}-sm.jpg ${sm}w, /images/${name}.jpg ${w}w`}
+    sizes={sizes}
+    alt={alt}
+    width={w}
+    height={h}
+    loading={eager ? undefined : 'lazy'}
+    fetchpriority={high ? 'high' : undefined}
+    decoding="async"
+  />
+</picture>

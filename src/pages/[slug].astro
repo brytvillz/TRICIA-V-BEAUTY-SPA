@@ -1,0 +1,114 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Picture from '../components/Picture.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import { SIZES, imageInfo } from '../lib/images';
+import { SITE, wa } from '../lib/site';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('services');
+  return pages.map((entry) => ({ params: { slug: entry.data.slug }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const d = entry.data; // note: d.draft and d.draftNote are internal and are never rendered
+const { Content } = await render(entry);
+const path = '/' + d.slug;
+const url = SITE + path;
+const hero = imageInfo(d.heroImage);
+const portrait = hero.h > hero.w;
+const extras = d.images.filter((i) => i.src !== d.heroImage);
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE + '/' },
+    { '@type': 'ListItem', position: 2, name: d.navLabel, item: url },
+  ],
+};
+const service = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: d.h1,
+  description: d.metaDescription,
+  url,
+  provider: { '@id': `${SITE}/#salon` },
+  areaServed: 'Nnewi, Anambra',
+};
+---
+<Base title={d.title} description={d.metaDescription} path={path}>
+  <script slot="jsonld" type="application/ld+json" set:html={JSON.stringify(breadcrumb)}></script>
+  <script slot="jsonld" type="application/ld+json" set:html={JSON.stringify(service)}></script>
+
+  <section class="page-hero">
+    <div class="inner">
+      <div>
+        <nav class="crumbs" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="/">Home</a></li>
+            <li><span aria-current="page">{d.navLabel}</span></li>
+          </ol>
+        </nav>
+        <h1 class="page-h1">{d.h1}</h1>
+        <p class="tagline">{d.tagline}</p>
+        <div class="hero-cta">
+          <a class="btn btn-fill" href={wa(d.navLabel)} target="_blank" rel="noopener">Book on WhatsApp</a>
+          <a class="btn btn-line" href="/#services">All services</a>
+        </div>
+      </div>
+      <div class={portrait ? 'media portrait' : 'media'}>
+        <Picture name={d.heroImage} alt={d.heroAlt} sizes={SIZES.page} eager high />
+      </div>
+    </div>
+  </section>
+
+  <div class="page-sec">
+    <div class="prose"><Content /></div>
+  </div>
+
+  {d.services.length > 0 && (
+    <div class="page-sec">
+      <h2>What we offer</h2>
+      <div class="offer-grid">
+        {d.services.map((s) => <ServiceCard title={s.name} text={s.text} label={s.name} />)}
+      </div>
+    </div>
+  )}
+
+  {extras.length > 0 && (
+    <div class="page-sec">
+      <div class="photo-row">
+        {extras.map((i) => (
+          <div class="media"><Picture name={i.src} alt={i.alt} sizes={SIZES.pageThumb} /></div>
+        ))}
+      </div>
+    </div>
+  )}
+
+  {d.faqs.length > 0 && (
+    <div class="page-sec faq">
+      <h2>Questions</h2>
+      {d.faqs.map((f) => (
+        <details>
+          <summary>{f.q}</summary>
+          <p>{f.a}</p>
+        </details>
+      ))}
+    </div>
+  )}
+
+  <div class="page-sec">
+    <div class="book-block">
+      <div>
+        <h2>Book {d.navLabel}</h2>
+        <p>Message us on WhatsApp with the treatment and the day you would like, and we will confirm. We reply during opening hours, Monday to Saturday, 8:00am to 9:00pm.</p>
+      </div>
+      <a class="btn btn-wa" href={wa(d.navLabel)} target="_blank" rel="noopener">
+        <svg class="ic" aria-hidden="true"><use href="#i-wa" /></svg>Book on WhatsApp
+      </a>
+    </div>
+  </div>
+  <div class="page-end"></div>
+</Base>
