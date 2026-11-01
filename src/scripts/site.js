@@ -4,6 +4,11 @@ const root = document.documentElement;
 const $ = (s, r = document) => r.querySelector(s);
 let lenis = null;
 
+/* Focus rings are for keyboard users: remember the last kind of input (CSS hides the ring after a tap or click). */
+const setInput = (v) => { if (root.getAttribute('data-input') !== v) root.setAttribute('data-input', v); };
+document.addEventListener('keydown', (e) => { if (!e.metaKey && !e.ctrlKey && !e.altKey) setInput('keyboard'); }, true);
+['pointerdown', 'mousedown', 'touchstart'].forEach((t) => document.addEventListener(t, () => setInput('pointer'), { capture: true, passive: true }));
+
 /* Fonts load without blocking first paint (the link starts as media="print"). */
 document.querySelectorAll('link[data-fonts]').forEach((l) => { l.media = 'all'; });
 

@@ -78,6 +78,8 @@ ul, ol { list-style: none; margin: 0; padding: 0 }
 h1, h2, h3, h4, p { margin: 0 }
 button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer }
 :focus-visible { outline: 2px solid var(--accent-text); outline-offset: 3px }
+/* focus rings are for keyboard users: no ring after a tap or click (site.js sets data-input) */
+html[data-input="pointer"] :focus-visible { outline: none }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap }
 .skip { position: absolute; left: 12px; top: -60px; z-index: 300; background: var(--btn-bg); color: var(--btn-fg); padding: 10px 16px; border-radius: 8px }
 .skip:focus { top: 12px }
@@ -143,6 +145,7 @@ section { position: relative; scroll-margin-top: var(--nav-h) }
 @media (hover: hover) and (pointer: fine) { .has-menu:hover .submenu { display: block } }
 .submenu a { display: block; padding: 10px 14px; border-radius: 8px; font-size: 15px; color: var(--fg) }
 .submenu a:hover, .submenu a:focus-visible { background: var(--surface-2); color: var(--accent-text) }
+.submenu a[aria-current="page"], .nav-links > a[aria-current="page"] { color: var(--accent-text) }
 .nav-actions { display: flex; align-items: center; gap: 8px; flex: none }
 .theme-toggle {
   width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--accent-line);
@@ -154,7 +157,7 @@ section { position: relative; scroll-margin-top: var(--nav-h) }
 [data-theme="dark"] .theme-toggle .i-sun { display: block }
 [data-theme="dark"] .theme-toggle .i-moon { display: none }
 :root:not([data-theme]) .theme-toggle .i-moon { display: block }
-.burger { display: none; width: 44px; height: 44px; position: relative; z-index: 102 }
+.burger { display: none; width: 44px; height: 44px; position: relative; z-index: 102; border-radius: 50% }
 .burger span { position: absolute; left: 10px; right: 10px; height: 1.5px; background: var(--accent-text); transition: transform .35s, opacity .25s, top .35s }
 .burger span:nth-child(1) { top: 15px } .burger span:nth-child(2) { top: 22px } .burger span:nth-child(3) { top: 29px }
 .burger[aria-expanded="true"] span:nth-child(1) { top: 22px; transform: rotate(45deg) }
@@ -384,15 +387,18 @@ footer li a:hover { color: var(--accent-text) }
 }
 .menu-panel.open { opacity: 1; visibility: visible; transition: opacity .25s, visibility 0s }
 .menu-top { flex: none; height: var(--nav-h); display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-inline: var(--gutter) }
-.menu-close { width: 44px; height: 44px; display: grid; place-items: center; color: var(--accent-text) }
+.menu-close { width: 44px; height: 44px; display: grid; place-items: center; color: var(--accent-text); border-radius: 50% }
 .menu-close .ic { width: 28px; height: 28px }
 .menu-list { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 28px; padding: 28px 24px max(48px, env(safe-area-inset-bottom)) }
 .menu-list ul { display: grid; gap: 4px; text-align: center }
-.menu-list > ul > li > a, .menu-label { font-family: var(--serif); font-size: 32px; line-height: 1.25; color: var(--fg); display: block; padding: 6px 12px }
-.menu-label { color: var(--accent-text) }
+.menu-list > ul > li > a { font-family: var(--serif); font-size: 32px; line-height: 1.25; color: var(--fg); display: block; padding: 6px 12px; border-radius: 10px }
+/* "Services" is a group heading, not a link: small, quiet, not gold */
+.menu-label { font-family: var(--sans); font-size: 12.5px; font-weight: 600; text-transform: uppercase; letter-spacing: .16em; color: var(--muted); padding: 18px 12px 6px; cursor: default; user-select: none; -webkit-user-select: none }
 .menu-group ul { margin-top: 2px }
-.menu-group a { font-family: var(--sans); font-size: 19px; color: var(--fg); display: block; padding: 10px 12px }
-.menu-list a:hover, .menu-list a:focus-visible { color: var(--accent-text) }
+.menu-group a { font-family: var(--sans); font-size: 19px; color: var(--fg); display: block; padding: 10px 12px; border-radius: 10px }
+/* the page you are on, and only that */
+.menu-list a[aria-current="page"] { color: var(--accent-text) }
+@media (hover: hover) and (pointer: fine) { .menu-list a:hover { color: var(--accent-text) } }
 .menu-list .btn { padding: 15px 36px; font-size: 15px }
 /* while the menu is open: no page scroll, and the WhatsApp button is hidden */
 html.menu-open, html.menu-open body { overflow: hidden; overscroll-behavior: none }

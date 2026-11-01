@@ -5,6 +5,8 @@
 import ThemeToggle from './ThemeToggle.astro';
 import { getCollection } from 'astro:content';
 import { wa } from '../lib/site';
+interface Props { path?: string }
+const { path = '/' } = Astro.props;
 const pages = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
 ---
 <div class="menu-panel" id="menuPanel" role="dialog" aria-modal="true" aria-label="Menu" inert>
@@ -22,11 +24,11 @@ const pages = (await getCollection('services')).sort((a, b) => a.data.order - b.
   </div>
   <nav class="menu-list" aria-label="Mobile">
     <ul>
-      <li><a href="/">Home</a></li>
+      <li><a href="/" aria-current={path === '/' ? 'page' : undefined}>Home</a></li>
       <li class="menu-group">
-        <span class="menu-label">Services</span>
-        <ul>
-          {pages.map((p) => <li><a href={'/' + p.data.slug}>{p.data.navLabel}</a></li>)}
+        <p class="menu-label" id="menuServicesLabel">Services</p>
+        <ul aria-labelledby="menuServicesLabel">
+          {pages.map((p) => <li><a href={'/' + p.data.slug} aria-current={path === '/' + p.data.slug ? 'page' : undefined}>{p.data.navLabel}</a></li>)}
         </ul>
       </li>
       <li><a href="/#gallery">Gallery</a></li>
