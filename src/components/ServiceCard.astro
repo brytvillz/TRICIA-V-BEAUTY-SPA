@@ -11,8 +11,10 @@ interface Props {
   id?: string;
   href?: string;
   featured?: boolean;
+  /** false for information cards (e.g. "How it works") that are not a bookable service */
+  book?: boolean;
 }
-const { title, text, label, icon, id, href, featured = false } = Astro.props;
+const { title, text, label, icon, id, href, featured = false, book = true } = Astro.props;
 const home = Boolean(icon);
 ---
 {home ? (
@@ -27,6 +29,6 @@ const home = Boolean(icon);
   <article class="offer">
     <h3>{title}</h3>
     <p>{text}</p>
-    <a class="dm" href={wa(label)} target="_blank" rel="noopener" aria-label={`Book on WhatsApp: ${label}`}>Book on WhatsApp</a>
+    {book && <a class="dm" href={wa(label)} target="_blank" rel="noopener" aria-label={`Book on WhatsApp: ${label}`}>Book on WhatsApp</a>}
   </article>
 )}

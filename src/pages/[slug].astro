@@ -19,6 +19,8 @@ const url = SITE + path;
 const hero = imageInfo(d.heroImage);
 const portrait = hero.h > hero.w;
 const extras = d.images.filter((i) => i.src !== d.heroImage);
+// the home-service page lists how it works / where we go / what we bring: information, not bookable services
+const infoOnly = d.slug === 'home-service';
 
 const breadcrumb = {
   '@context': 'https://schema.org',
@@ -72,7 +74,7 @@ const service = {
     <div class="page-sec">
       <h2>What we offer</h2>
       <div class="offer-grid">
-        {d.services.map((s) => <ServiceCard title={s.name} text={s.text} label={s.name} />)}
+        {d.services.map((s) => <ServiceCard title={s.name} text={s.text} label={s.name} book={!infoOnly} />)}
       </div>
     </div>
   )}
