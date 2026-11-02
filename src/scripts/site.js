@@ -209,7 +209,7 @@ if (lb) {
   // the viewer's "View photo larger" button opens the current photo (full-size .jpg) in the lightbox
   const enlarge = $('#storyEnlarge');
   if (enlarge) enlarge.addEventListener('click', () => {
-    const img = document.querySelector('.story-slide.is-current img');
+    const img = document.querySelector('.story-slide.is-current img.story-photo');
     if (img) open(img.getAttribute('src'), img.alt);
   });
   lb.addEventListener('click', (e) => { if (e.target !== lbImg) close(); });

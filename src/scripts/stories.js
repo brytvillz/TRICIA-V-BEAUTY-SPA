@@ -10,7 +10,7 @@ if (viewer) {
   const live = document.getElementById('storyLive');
   const pauseBtn = document.getElementById('storyPause');
   const labels = slides.map((s) => s.dataset.label);
-  const alts = slides.map((s) => s.querySelector('img').alt);
+  const alts = slides.map((s) => s.querySelector('img.story-photo').alt);
   const n = slides.length;
   let cur = 0;
   // anything that should hold the story still

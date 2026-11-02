@@ -268,10 +268,15 @@ section { position: relative; scroll-margin-top: var(--nav-h) }
 .viewer { position: relative; width: 100%; height: 100%; border-radius: 36px; overflow: hidden; background: #000; touch-action: pan-y; -webkit-user-select: none; user-select: none; color: #fff }
 .viewer:focus-visible { outline-offset: 5px }
 .story-slides { position: absolute; inset: 0 }
-.story-slide { position: absolute; inset: 0; margin: 0; opacity: 0; transition: opacity .35s ease }
-.story-slide.is-current { opacity: 1 }
-.story-slide picture, .story-slide img { position: absolute; inset: 0; width: 100%; height: 100%; display: block }
-.story-slide img { object-fit: cover }
+/* hidden slides are also visibility:hidden, so their blurred backdrops cost nothing */
+.story-slide { position: absolute; inset: 0; margin: 0; overflow: hidden; opacity: 0; visibility: hidden; transition: opacity .35s ease, visibility 0s linear .35s }
+.story-slide.is-current { opacity: 1; visibility: visible; transition: opacity .35s ease }
+.story-slide picture { position: absolute; inset: 0; display: block }
+.story-slide img { position: absolute; display: block }
+/* the photo is shown whole... */
+.story-slide img.story-photo { inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: center }
+/* ...over a blurred, darkened copy of itself that fills the rest of the screen (inset overshoots so the blur never shows an edge) */
+.story-slide img.story-bg { inset: -14%; width: 128%; height: 128%; max-width: none; object-fit: cover; filter: blur(24px) brightness(.62) saturate(1.1) }
 .story-shade { position: absolute; inset: 0 0 auto 0; height: 140px; background: linear-gradient(180deg, rgba(0, 0, 0, .62), transparent); pointer-events: none }
 .story-zone { position: absolute; top: 0; bottom: 0; width: 50%; z-index: 2; cursor: pointer; -webkit-tap-highlight-color: transparent }
 .story-prev { left: 0 } .story-next { right: 0 }
