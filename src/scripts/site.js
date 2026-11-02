@@ -216,6 +216,12 @@ if (tourDialog && tourBtn && typeof tourDialog.showModal === 'function') {
   });
 }
 
+/* ── Home page: the floating WhatsApp button steps aside while the hero booking card is on screen ── */
+const heroBook = $('.hero-book'), waFloat = $('.wa-float');
+if (heroBook && waFloat && 'IntersectionObserver' in window) {
+  new IntersectionObserver((entries) => { waFloat.classList.toggle('is-away', entries[entries.length - 1].isIntersecting); }).observe(heroBook);   // .hero-book includes the room the bubble overhangs
+}
+
 /* ── Lightbox (home gallery) ── */
 const lb = $('#lb');
 if (lb) {

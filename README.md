@@ -25,7 +25,7 @@ npm run check:csp   # after a build: checks every inline script is allowed by ve
 ## QR short links: never remove or rename
 
 `/review` and `/book` (with or without a trailing slash) are printed on QR codes in the salon. They are 307
-(temporary) redirects in `vercel.json`: `/review` goes to the Google review page and `/book` goes to the on-site booking form (`/booking`), which sends the request to WhatsApp. (It used to go straight to WhatsApp.)
+(temporary) redirects in `vercel.json`: `/review` goes to the Google review page and `/book` goes to the on-site booking form (`/booking?src=qr`), which sends the request to WhatsApp. The `src=qr` part makes the message end with "(Sent via QR code)" so scans can be told apart, so keep it. (It used to go straight to WhatsApp.)
 **Do not remove, rename or move them.** You can change where they point at any time
 (the 307 means browsers do not cache the old destination), but the two paths themselves must keep working forever,
 because the printed codes cannot be changed.

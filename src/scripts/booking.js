@@ -95,7 +95,7 @@ if (form) {
     ];
     if (home.checked) lines.push(`Home service: Yes, at ${oneLine(loc.value)}`);
     if (note.value.trim()) lines.push(`Note: ${oneLine(note.value)}`);
-    lines.push('(Sent from your website)');
+    lines.push(new URLSearchParams(location.search).get('src') === 'qr' ? '(Sent via QR code)' : '(Sent from your website)');   // /book (the printed QR code) redirects to /booking?src=qr
     return lines.join('\n');
   }
   form.addEventListener('submit', (e) => {
