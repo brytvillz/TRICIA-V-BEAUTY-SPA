@@ -1,0 +1,82 @@
+---
+import { bookingGroups, NOT_SURE, TIMES } from '../data/booking';
+import { wa } from '../lib/site';
+---
+<!-- Shown until the script starts the form: this is also the fallback with JavaScript off or broken -->
+<div class="bform-fallback" id="bookingFallback">
+  <p>The booking form needs JavaScript. You can still book by chatting with us directly.</p>
+  <a class="btn btn-wa" href={wa()} target="_blank" rel="noopener">
+    <svg class="ic" aria-hidden="true"><use href="#i-wa" /></svg>Chat with us on WhatsApp
+  </a>
+</div>
+
+<form class="bform" id="bookingForm" novalidate hidden>
+  <p class="bform-note"><span aria-hidden="true">*</span> Required</p>
+
+  <div class="field" id="field-service">
+    <label for="f-service">Service <span class="req" aria-hidden="true">*</span></label>
+    <select id="f-service" name="service" required aria-describedby="f-service-err">
+      <option value="">Choose a service</option>
+      {bookingGroups.map((g) => (
+        <optgroup label={g.label} data-slug={g.slug}>
+          {g.options.map((o) => <option value={o}>{o}</option>)}
+        </optgroup>
+      ))}
+      <option value={NOT_SURE}>{NOT_SURE}</option>
+    </select>
+    <p class="err" id="f-service-err" hidden></p>
+  </div>
+
+  <div class="field" id="field-day">
+    <label for="f-day">Preferred day <span class="req" aria-hidden="true">*</span></label>
+    <input type="date" id="f-day" name="day" required aria-describedby="f-day-hint f-day-err" />
+    <p class="hint" id="f-day-hint">Monday to Saturday. We're closed on Sundays.</p>
+    <p class="err" id="f-day-err" hidden></p>
+  </div>
+
+  <fieldset class="field" id="field-time" role="radiogroup" aria-required="true" aria-describedby="f-time-err">
+    <legend>Preferred time <span class="req" aria-hidden="true">*</span></legend>
+    <div class="choices">
+      {TIMES.map((t, i) => (
+        <label class="choice">
+          <input type="radio" name="time" value={t.value} required={i === 0} />
+          <span><strong>{t.label}</strong><small>{t.hours}</small></span>
+        </label>
+      ))}
+    </div>
+    <p class="err" id="f-time-err" hidden></p>
+  </fieldset>
+
+  <div class="field" id="field-name">
+    <label for="f-name">Your name <span class="req" aria-hidden="true">*</span></label>
+    <input type="text" id="f-name" name="name" required maxlength="80" autocomplete="name" aria-describedby="f-name-err" />
+    <p class="err" id="f-name-err" hidden></p>
+  </div>
+
+  <div class="field">
+    <label class="check" for="f-home">
+      <input type="checkbox" id="f-home" name="home" aria-controls="field-location" />
+      <span><strong>Home service</strong><small>We come to you, anywhere in Anambra</small></span>
+    </label>
+  </div>
+
+  <div class="field" id="field-location" hidden>
+    <label for="f-location">Your location (town or area) <span class="req" aria-hidden="true">*</span></label>
+    <input type="text" id="f-location" name="location" maxlength="100" autocomplete="address-level2" aria-describedby="f-location-err" />
+    <p class="err" id="f-location-err" hidden></p>
+  </div>
+
+  <div class="field" id="field-note">
+    <label for="f-note">Anything we should know? <span class="opt">(optional)</span></label>
+    <textarea id="f-note" name="note" rows="4" maxlength="300" aria-describedby="f-note-count"></textarea>
+    <p class="hint count" id="f-note-count"><span id="f-note-n">0</span> / 300</p>
+  </div>
+
+  <button type="submit" class="btn btn-wa bform-send">
+    <svg class="ic" aria-hidden="true"><use href="#i-wa" /></svg>Send on WhatsApp
+  </button>
+  <p class="bform-fine">This opens WhatsApp with your request. We'll reply to confirm your exact time.</p>
+</form>
+<script>
+  import '../scripts/booking.js';
+</script>

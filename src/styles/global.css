@@ -382,6 +382,9 @@ section { position: relative; scroll-margin-top: var(--nav-h) }
 .book-cta h2 { font-size: clamp(2.75rem, 6.4vw, 5rem) }
 .book-cta .lede { font-size: 18px; color: var(--muted); max-width: 46ch }
 .book-cta .btn { margin-top: 44px }
+.book-cta .bform { margin-top: 40px; max-width: 680px }
+.book-cta .bform-fallback { margin-top: 32px }
+.book-cta .bform .btn, .book-cta .bform-fallback .btn { margin-top: 0 }
 .book-hours { margin-top: 20px; color: var(--accent-text); font-size: 14px; letter-spacing: .08em; font-weight: 500 }
 .book-info { margin-top: 96px; display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(32px, 6vw, 96px); align-items: start }
 .contact { display: grid; grid-template-columns: 1fr; gap: 0; border-top: 1px solid var(--line) }
