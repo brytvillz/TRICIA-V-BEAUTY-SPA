@@ -1,34 +1,19 @@
 ---
 import { wa } from '../lib/site';
 
+/* A card on a service page: one treatment with a short description and a booking link. */
 interface Props {
   title: string;
   text: string;
   /** plain-text name used in the aria-label and in the WhatsApp message */
   label: string;
-  /** home page card: icon, id (anchor), page link, featured flag */
-  icon?: string;
-  id?: string;
-  href?: string;
-  featured?: boolean;
   /** false for information cards (e.g. "How it works") that are not a bookable service */
   book?: boolean;
 }
-const { title, text, label, icon, id, href, featured = false, book = true } = Astro.props;
-const home = Boolean(icon);
+const { title, text, label, book = true } = Astro.props;
 ---
-{home ? (
-  <article class={featured ? 'svc featured' : 'svc'} id={id ? `svc-${id}` : undefined} data-reveal>
-    {featured && <span class="tag">Featured</span>}
-    <svg class="ic" aria-hidden="true"><use href={`#${icon}`} /></svg>
-    <h3><a class="svc-link" href={href}>{title}</a></h3>
-    <p>{text}</p>
-    <a class="dm" href={wa()} target="_blank" rel="noopener" aria-label={`${label}: DM to book on WhatsApp`}>DM to book</a>
-  </article>
-) : (
-  <article class="offer">
-    <h3>{title}</h3>
-    <p>{text}</p>
-    {book && <a class="dm" href={wa(label)} target="_blank" rel="noopener" aria-label={`Book on WhatsApp: ${label}`}>Book on WhatsApp</a>}
-  </article>
-)}
+<article class="offer">
+  <h3>{title}</h3>
+  <p>{text}</p>
+  {book && <a class="dm" href={wa(label)} target="_blank" rel="noopener" aria-label={`Book on WhatsApp: ${label}`}>Book on WhatsApp</a>}
+</article>

@@ -1,12 +1,16 @@
 ---
 import Base from '../layouts/Base.astro';
 import Picture from '../components/Picture.astro';
-import ServiceCard from '../components/ServiceCard.astro';
+import ServiceGroupCard from '../components/ServiceGroupCard.astro';
+import { getCollection } from 'astro:content';
 import Gallery from '../components/Gallery.astro';
 import MapEmbed from '../components/MapEmbed.astro';
-import { homeServices, packages, ticker } from '../data/home';
+import { serviceGroups, packages, ticker } from '../data/home';
 import { SIZES } from '../lib/images';
 import { wa, PHONE_E164, PHONE_DISPLAY } from '../lib/site';
+
+// each card's one-line description is the tagline of its service page
+const taglines = Object.fromEntries((await getCollection('services')).map((e) => [e.data.slug, e.data.tagline]));
 ---
 <Base path="/" twitterDescription="Premium pedicure, manicure, facials, barbing, dental care, Moroccan radiance therapy, permanent and semi-permanent tattoos and home services in Nnewi, Anambra. Book on WhatsApp.">
   <link slot="head" rel="preload" as="image" href="/images/about-poster.jpg" fetchpriority="high" />
@@ -62,11 +66,11 @@ import { wa, PHONE_E164, PHONE_DISPLAY } from '../lib/site';
         <p class="eyebrow">Our Services</p>
         <h2 class="title">Every treatment, <em>crafted for you.</em></h2>
       </div>
-      <div class="svc-grid">
-        {homeServices.map((s) => (
-          <ServiceCard id={s.id} icon={s.icon} title={s.title} label={s.label} text={s.text} href={s.page} featured={s.featured} />
-        ))}
-      </div>
+    </div>
+    <div class="stack" id="svcStack">
+      {serviceGroups.map((g, i) => (
+        <ServiceGroupCard index={i} total={serviceGroups.length} slug={g.slug} title={g.title} tagline={g.description ?? taglines[g.slug]} image={g.image} alt={g.alt} pills={g.pills} />
+      ))}
     </div>
   </section>
 
