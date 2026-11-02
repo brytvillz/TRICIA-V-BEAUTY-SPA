@@ -4,6 +4,27 @@ const root = document.documentElement;
 const $ = (s, r = document) => r.querySelector(s);
 let lenis = null;
 
+/* ── Splash: leaves when the page has loaded (but not before 400ms, and never later than 1000ms) ── */
+const splash = $('#splash');
+if (splash && root.classList.contains('splash-on')) {
+  const MIN = 430, MAX = 1000;   // MIN carries a ~30ms margin for the frame between 'started' and 'actually painted', so at least 400ms is really shown
+  // the clock starts when the overlay really began to render (its ring animation's start time), not when the
+  // head script ran: the first paint can come noticeably later than that, and 400ms means 400ms on screen
+  const ring = splash.querySelector('circle');
+  const anim = ring && ring.getAnimations ? ring.getAnimations()[0] : null;
+  const fp = performance.getEntriesByName ? performance.getEntriesByName('first-paint')[0] : null;   // the overlay is the first thing painted
+  const t0 = fp ? fp.startTime : anim && typeof anim.startTime === 'number' ? anim.startTime : parseInt(root.getAttribute('data-st') || '0', 10);
+  let gone = false;
+  const hide = () => {
+    if (gone) return; gone = true;
+    splash.classList.add('is-out');                                // 300ms fade, pointer-events none
+    setTimeout(() => { splash.remove(); root.classList.remove('splash-on'); root.removeAttribute('data-st'); }, 340);
+  };
+  const afterMin = () => setTimeout(hide, Math.max(0, t0 + MIN - performance.now()));
+  if (document.readyState === 'complete') afterMin(); else window.addEventListener('load', afterMin, { once: true });
+  setTimeout(hide, Math.max(0, t0 + MAX - performance.now()));
+}
+
 /* Focus rings are for keyboard users: remember the last kind of input (CSS hides the ring after a tap or click). */
 const setInput = (v) => { if (root.getAttribute('data-input') !== v) root.setAttribute('data-input', v); };
 document.addEventListener('keydown', (e) => { if (!e.metaKey && !e.ctrlKey && !e.altKey) setInput('keyboard'); }, true);

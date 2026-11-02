@@ -91,6 +91,13 @@ const salon = {
   <slot name="jsonld" />
 </head>
 <body>
+  <!-- Splash: only ever shown when the head script adds html.splash-on (first visit in a session, motion allowed, JS on). -->
+  <div class="splash" id="splash" aria-hidden="true" inert>
+    <div class="splash-mark">
+      <svg class="splash-ring" viewBox="0 0 120 120" focusable="false"><circle cx="60" cy="60" r="56" pathLength="1" /></svg>
+      <picture><source srcset="/images/logo-mark-192.webp" type="image/webp" /><img src="/images/logo-mark-192.png" alt="" width="192" height="192" decoding="async" /></picture>
+    </div>
+  </div>
   <a class="skip" href="#main">Skip to content</a>
   <Icons />
   <Header path={path} />
