@@ -1,7 +1,6 @@
 ---
 import ThemeToggle from './ThemeToggle.astro';
 import { getCollection } from 'astro:content';
-import { wa } from '../lib/site';
 
 interface Props { path?: string }
 const { path = '/' } = Astro.props;
@@ -29,7 +28,7 @@ const onService = pages.some((p) => '/' + p.data.slug === path);
       </div>
       <a href="/#gallery">Gallery</a>
       <a href="/#about">About</a>
-      <a href={wa()} class="btn btn-fill" target="_blank" rel="noopener">Book Now</a>
+      <a href="/booking" class="btn btn-fill" aria-current={path === '/booking' ? 'page' : undefined}>Book Now</a>
     </nav>
     <div class="nav-actions">
       <ThemeToggle />

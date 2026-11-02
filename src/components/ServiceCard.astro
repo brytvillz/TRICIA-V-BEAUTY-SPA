@@ -1,5 +1,5 @@
 ---
-import { wa } from '../lib/site';
+import { bookingHref } from '../data/booking';
 
 /* A card on a service page: one treatment with a short description and a booking link. */
 interface Props {
@@ -15,5 +15,5 @@ const { title, text, label, book = true } = Astro.props;
 <article class="offer">
   <h3>{title}</h3>
   <p>{text}</p>
-  {book && <a class="dm" href={wa(label)} target="_blank" rel="noopener" aria-label={`Book on WhatsApp: ${label}`}>Book on WhatsApp</a>}
+  {book && <a class="dm" href={bookingHref(label)} aria-label={`Book ${label}`}>Book</a>}
 </article>

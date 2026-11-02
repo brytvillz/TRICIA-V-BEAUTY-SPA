@@ -1,6 +1,6 @@
 ---
 import Picture from './Picture.astro';
-import { wa } from '../lib/site';
+import { bookingHref } from '../data/booking';
 
 interface Props {
   index: number;
@@ -28,7 +28,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
     </div>
     <div class="g-actions">
       <a class="btn btn-line" href={`/${slug}`} aria-label={`Explore ${title}`}>Explore</a>
-      <a class="btn btn-fill" href={wa(title)} target="_blank" rel="noopener" aria-label={`Book ${title} on WhatsApp`}>Book</a>
+      <a class="btn btn-fill" href={bookingHref(slug)} aria-label={`Book ${title}`}>Book</a>
     </div>
   </div>
   <div class="g-dim" aria-hidden="true"></div>

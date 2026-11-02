@@ -11,7 +11,7 @@ const pages = (await getCollection('services')).sort((a, b) => a.data.order - b.
         <p>Your beauty, our artistry.</p>
       </div>
       <div>
-        <h3>Quick Links</h3>
+        <h2>Quick Links</h2>
         <ul>
           <li><a href="/#services">Services</a></li>
           <li><a href="/#gallery">Gallery</a></li>
@@ -21,13 +21,13 @@ const pages = (await getCollection('services')).sort((a, b) => a.data.order - b.
         </ul>
       </div>
       <div>
-        <h3>Services</h3>
+        <h2>Services</h2>
         <ul>
           {pages.map((p) => <li><a href={'/' + p.data.slug}>{p.data.navLabel}</a></li>)}
         </ul>
       </div>
       <div>
-        <h3>Connect</h3>
+        <h2>Connect</h2>
         <ul>
           <li><a href={INSTAGRAM} target="_blank" rel="noopener">Instagram</a></li>
           <li><a href={TIKTOK} target="_blank" rel="noopener">TikTok</a></li>
