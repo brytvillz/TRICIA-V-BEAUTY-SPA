@@ -17,12 +17,12 @@
     },
     {
       "source": "/book",
-      "destination": "https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20scanned%20your%20QR%20code%20and%20would%20like%20to%20book%20an%20appointment.",
+      "destination": "/booking",
       "statusCode": 307
     },
     {
       "source": "/book/",
-      "destination": "https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20scanned%20your%20QR%20code%20and%20would%20like%20to%20book%20an%20appointment.",
+      "destination": "/booking",
       "statusCode": 307
     }
   ],
