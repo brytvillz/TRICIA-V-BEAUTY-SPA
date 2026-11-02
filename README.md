@@ -22,6 +22,18 @@ npm run check:csp   # after a build: checks every inline script is allowed by ve
 - Photos, video, icons and the manifest are in `public/`.
 - WhatsApp links are built by `wa()` in `src/lib/site.ts`, so every link carries the same pre-filled message.
 
+## QR short links: never remove or rename
+
+`/review` and `/book` (with or without a trailing slash) are printed on QR codes in the salon. They are 307
+(temporary) redirects in `vercel.json`: `/review` goes to the Google review page and `/book` goes to WhatsApp with a
+pre-filled booking message. **Do not remove, rename or move them.** You can change where they point at any time
+(the 307 means browsers do not cache the old destination), but the two paths themselves must keep working forever,
+because the printed codes cannot be changed.
+
+If a custom domain is added later, `tricia-v.vercel.app` must keep working too, because the codes may point at it:
+redirect it to the new domain (so `tricia-v.vercel.app/review` and `/book` still end up in the right place) and
+**never delete or rename the Vercel project**.
+
 ## Security policy (vercel.json)
 
 The Content-Security-Policy allows scripts only from the site itself plus one hashed inline script (the theme

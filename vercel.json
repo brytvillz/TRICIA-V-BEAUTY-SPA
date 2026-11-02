@@ -4,6 +4,28 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/review",
+      "destination": "https://g.page/r/Ca3PJFmQjfdYEAI/review",
+      "statusCode": 307
+    },
+    {
+      "source": "/review/",
+      "destination": "https://g.page/r/Ca3PJFmQjfdYEAI/review",
+      "statusCode": 307
+    },
+    {
+      "source": "/book",
+      "destination": "https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20scanned%20your%20QR%20code%20and%20would%20like%20to%20book%20an%20appointment.",
+      "statusCode": 307
+    },
+    {
+      "source": "/book/",
+      "destination": "https://wa.me/2348061172417?text=Hello%20TRICIA-V%2C%20I%20scanned%20your%20QR%20code%20and%20would%20like%20to%20book%20an%20appointment.",
+      "statusCode": 307
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
@@ -12,14 +34,28 @@
           "key": "Content-Security-Policy",
           "value": "default-src 'self'; script-src 'self' 'sha256-BCQThcEgEvrvMdYGpSOQTmMVW8To9u8ot1OQQdJhVJw='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; frame-src 'self' https://maps.google.com https://www.google.com; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; object-src 'none'"
         },
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        }
       ]
     },
     {
       "source": "/_astro/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     }
   ]
 }
