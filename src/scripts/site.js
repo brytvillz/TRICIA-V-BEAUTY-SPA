@@ -149,16 +149,15 @@ function updateStatus() {
   try { n = lagosNow(); } catch (e) { return; }
   const workDay = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].includes(n.day);
   const OPEN = 8 * 60, CLOSE = 21 * 60;
-  let state, title, sub;
-  if (workDay && n.mins >= OPEN && n.mins < CLOSE) { state = 'open'; title = 'Open now'; sub = 'Until 9pm'; }
+  let state, text;
+  if (workDay && n.mins >= OPEN && n.mins < CLOSE) { state = 'open'; text = 'Open now · until 9pm'; }
   else {
-    state = 'closed'; title = 'Closed now';
+    state = 'closed';
     const toMonday = n.day === 'Sun' || (n.day === 'Sat' && n.mins >= CLOSE);
-    sub = toMonday ? 'Opens Monday 8am' : 'Opens 8am';
+    text = toMonday ? 'Opens Monday 8am' : 'Closed now · opens 8am';
   }
   status.setAttribute('data-state', state);
-  $('#statusTitle').textContent = title;
-  $('#statusSub').textContent = sub;
+  $('#statusText').textContent = text;
 }
 updateStatus();
 if (status) setInterval(updateStatus, 60000);
@@ -184,6 +183,37 @@ if (video && !reduce) {
       });
     }).observe(video);
   }
+}
+
+/* ── Tour video: the bubble's video full screen in a native <dialog>, with controls and sound ── */
+const tourDialog = $('#tourDialog');
+const tourBtn = $('#tourBtn');
+if (tourDialog && tourBtn && typeof tourDialog.showModal === 'function') {
+  const tourVideo = $('#tourVideo');
+  tourBtn.hidden = false;
+  tourBtn.addEventListener('click', () => {
+    if (!tourVideo.querySelector('source')) {
+      ['webm', 'mp4'].forEach((ext) => {
+        const src = document.createElement('source');
+        src.src = `/videos/about-loop.${ext}`; src.type = `video/${ext}`;
+        tourVideo.appendChild(src);
+      });
+      tourVideo.load();
+    }
+    if (video) video.pause();
+    tourDialog.showModal();
+    if (lenis) lenis.stop(); else root.style.overflow = 'hidden';
+    tourVideo.controls = true; tourVideo.muted = false;   // controls are added on opening: a closed dialog carries no player UI
+    const p = tourVideo.play(); if (p && p.catch) p.catch(() => {});
+    $('#tourClose').focus();
+  });
+  $('#tourClose').addEventListener('click', () => tourDialog.close());
+  tourDialog.addEventListener('close', () => {   // Escape, the close button or anything else
+    tourVideo.pause();
+    if (lenis) lenis.start(); else root.style.overflow = '';
+    tourBtn.focus();
+    if (video && !reduce && video.querySelector('source[src]')) { const p = video.play(); if (p && p.catch) p.catch(() => {}); }
+  });
 }
 
 /* ── Lightbox (home gallery) ── */

@@ -6,6 +6,7 @@ import { getCollection } from 'astro:content';
 import Gallery from '../components/Gallery.astro';
 import MapEmbed from '../components/MapEmbed.astro';
 import BookingForm from '../components/BookingForm.astro';
+import HeroBook from '../components/HeroBook.astro';
 import { serviceGroups, packages, ticker } from '../data/home';
 import { SIZES } from '../lib/images';
 import { wa, PHONE_E164, PHONE_DISPLAY } from '../lib/site';
@@ -14,8 +15,6 @@ import { wa, PHONE_E164, PHONE_DISPLAY } from '../lib/site';
 const taglines = Object.fromEntries((await getCollection('services')).map((e) => [e.data.slug, e.data.tagline]));
 ---
 <Base path="/" twitterDescription="Premium pedicure, manicure, facials, barbing, dental care, Moroccan radiance therapy, permanent and semi-permanent tattoos and home services in Nnewi, Anambra. Book on WhatsApp.">
-  <link slot="head" rel="preload" as="image" href="/images/about-poster.jpg" fetchpriority="high" />
-
   <!-- ═════════ HERO B ═════════ -->
   <section class="hero-b" id="top">
     <div class="inner">
@@ -24,28 +23,11 @@ const taglines = Object.fromEntries((await getCollection('services')).map((e) =>
         <p class="display">Look good. Feel <em>cared for.</em></p>
         <p class="sub">TRICIA-V Unisex Salon and Spa, Bishop Uzodike Road, Nnewi. Facials, nails, hair, barbing, dental care and tattoos for women and men, in the salon or at your home.</p>
         <div class="hero-cta">
-          <a class="btn btn-fill" href={wa()} target="_blank" rel="noopener">Book on WhatsApp</a>
           <a class="btn btn-line" href="#gallery">See our work</a>
+          <a class="hero-link" href="#services">All services</a>
         </div>
       </div>
-      <div class="arch-wrap">
-        <div class="arch">
-          <video
-            id="heroVideo"
-            poster="/images/about-poster.jpg"
-            width="576" height="720"
-            muted loop playsinline preload="none"
-            aria-label="A short tour of TRICIA-V and some of our treatments">
-            <source data-src="/videos/about-loop.webm" type="video/webm" />
-            <source data-src="/videos/about-loop.mp4" type="video/mp4" />
-          </video>
-        </div>
-        <!-- Default works without JS; site.js replaces it with the live Lagos-time status. -->
-        <div class="status" id="status" data-state="default" aria-live="polite">
-          <span class="dot"></span>
-          <div><strong id="statusTitle">Open Mon to Sat</strong><span id="statusSub">8am to 9pm</span></div>
-        </div>
-      </div>
+      <HeroBook />
     </div>
   </section>
 
