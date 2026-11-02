@@ -4,25 +4,59 @@ const root = document.documentElement;
 const $ = (s, r = document) => r.querySelector(s);
 let lenis = null;
 
-/* ── Splash: leaves when the page has loaded (but not before 3s, and never later than 3.6s) ── */
+/* ── Photos: a placeholder colour (CSS), then a 300ms fade as each one arrives. Photos that are already loaded are left alone. ── */
+document.querySelectorAll('img.ph').forEach((img) => {
+  if (img.complete || img.getAttribute('fetchpriority') === 'high') return;   // already there (or the hero photo, which must paint at once)
+  img.classList.add('ph-wait');
+  const show = () => img.classList.remove('ph-wait');
+  img.addEventListener('load', () => { (img.decode ? img.decode() : Promise.resolve()).then(show, show); }, { once: true });   // decoded first, so it never pops in half-ready
+  img.addEventListener('error', show, { once: true });
+});
+
+/* ── Splash: leaves as soon as the hero is ready (never before 400ms, never after 3s) ──
+   Ready = the splash logo, the video bubble's poster and every photo above the fold are loaded and decoded, and the fonts are in. */
 const splash = $('#splash');
 if (splash && root.classList.contains('splash-on')) {
-  const MIN = 3030, MAX = 3600;   // MIN carries a ~30ms margin for the frame between 'started' and 'actually painted', so at least 3000ms is really shown
-  // the clock starts when the overlay really began to render (its ring animation's start time), not when the
-  // head script ran: the first paint can come noticeably later than that, and 3s means 3s on screen
+  const MIN = 430, MAX = 3000;   // MIN carries a ~30ms margin for the frame between 'started' and 'actually painted', so at least 400ms is really shown
+  // the clock starts when the overlay was really painted (the first-paint entry), not when the head script ran:
+  // the first paint can come noticeably later, and 400ms means 400ms on screen
   const ring = splash.querySelector('circle');
   const anim = ring && ring.getAnimations ? ring.getAnimations()[0] : null;
-  const fp = performance.getEntriesByName ? performance.getEntriesByName('first-paint')[0] : null;   // the overlay is the first thing painted
-  const t0 = fp ? fp.startTime : anim && typeof anim.startTime === 'number' ? anim.startTime : parseInt(root.getAttribute('data-st') || '0', 10);
-  let gone = false;
-  const hide = () => {
+  const paintedAt = () => new Promise((res) => {
+    const seen = performance.getEntriesByName ? performance.getEntriesByName('first-paint')[0] : null;
+    if (seen) return res(seen.startTime);
+    const fallback = () => res(anim && typeof anim.startTime === 'number' ? anim.startTime : parseInt(root.getAttribute('data-st') || '0', 10));
+    if (!('PerformanceObserver' in window)) return fallback();
+    let done = false;
+    const finish = (fn) => { if (!done) { done = true; fn(); } };
+    try {
+      const po = new PerformanceObserver((list) => { const e = list.getEntriesByName('first-paint')[0]; if (e) { po.disconnect(); finish(() => res(e.startTime)); } });
+      po.observe({ type: 'paint', buffered: true });
+    } catch (e) { return fallback(); }
+    setTimeout(() => finish(fallback), 300);   // engines that never report first-paint: the animation's start time
+  });
+  let gone = false, start = 0;
+  const hide = (why) => {
     if (gone) return; gone = true;
+    if (import.meta.env.DEV) console.info(`[splash] dismissed ${Math.round(performance.now() - start)}ms after first paint (${why})`);
     splash.classList.add('is-out');                                // 300ms fade, pointer-events none
     setTimeout(() => { splash.remove(); root.classList.remove('splash-on'); root.removeAttribute('data-st'); }, 340);
   };
-  const afterMin = () => setTimeout(hide, Math.max(0, t0 + MIN - performance.now()));
-  if (document.readyState === 'complete') afterMin(); else window.addEventListener('load', afterMin, { once: true });
-  setTimeout(hide, Math.max(0, t0 + MAX - performance.now()));
+  const decoded = (img) => (img.complete ? Promise.resolve() : new Promise((res) => { img.addEventListener('load', res, { once: true }); img.addEventListener('error', res, { once: true }); }))
+    .then(() => (img.decode ? img.decode().catch(() => {}) : null));
+  const inView = (img) => { const r = img.getBoundingClientRect(); return r.width > 0 && r.height > 0 && r.bottom > 0 && r.top < window.innerHeight && r.right > 0 && r.left < window.innerWidth; };
+  const waits = [...document.images].filter((i) => splash.contains(i) || inView(i)).map(decoded);   // the splash logo + everything above the fold
+  const poster = $('#heroVideo') && $('#heroVideo').getAttribute('poster');
+  if (poster) { const im = new Image(); im.src = poster; waits.push(decoded(im)); }
+  const link = $('link[data-fonts]');   // fonts: the stylesheet is in, a frame has laid text out (so the faces are requested), then document.fonts.ready
+  waits.push(new Promise((res) => { if (!link || link.sheet) res(); else { link.addEventListener('load', res, { once: true }); link.addEventListener('error', res, { once: true }); } })
+    .then(() => new Promise((res) => requestAnimationFrame(() => requestAnimationFrame(res))))
+    .then(() => document.fonts && document.fonts.ready));
+  paintedAt().then((t0) => {
+    start = t0;
+    setTimeout(() => hide('3s limit'), Math.max(0, t0 + MAX - performance.now()));
+    Promise.all(waits.map((w) => w.catch(() => {}))).then(() => setTimeout(() => hide('ready'), Math.max(0, t0 + MIN - performance.now())));
+  });
 }
 
 /* Focus rings are for keyboard users: remember the last kind of input (CSS hides the ring after a tap or click). */

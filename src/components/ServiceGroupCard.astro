@@ -17,7 +17,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
 ---
 <article class="gcard" style={`--i:${index}`} aria-labelledby={`g-${slug}`}>
   <div class="g-photo">
-    <Picture name={image} alt={alt} sizes="(max-width: 899px) 90vw, 550px" />
+    <Picture name={image} alt={alt} sizes="(max-width: 899px) 90vw, 550px" eager={index < 2} low={index < 2} />
   </div>
   <div class="g-body">
     <p class="g-count">{pad(index + 1)} / {pad(total)}</p>

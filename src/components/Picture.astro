@@ -5,18 +5,19 @@ interface Props {
   name: string;
   alt: string;
   sizes: string;
-  /** eager = above the fold (no lazy loading); high = fetchpriority="high" */
+  /** eager = above the fold (no lazy loading); high = fetchpriority="high"; low = fetchpriority="low" (eager, but must not compete with the hero) */
   eager?: boolean;
   high?: boolean;
+  low?: boolean;
   class?: string;
 }
-const { name, alt, sizes, eager = false, high = false, class: cls } = Astro.props;
+const { name, alt, sizes, eager = false, high = false, low = false, class: cls } = Astro.props;
 const { w, h, sm } = imageInfo(name);
 ---
 <picture>
   <source srcset={`/images/${name}-sm.webp ${sm}w, /images/${name}.webp ${w}w`} sizes={sizes} type="image/webp" />
   <img
-    class={cls}
+    class={cls ? `ph ${cls}` : 'ph'}
     src={`/images/${name}.jpg`}
     srcset={`/images/${name}-sm.jpg ${sm}w, /images/${name}.jpg ${w}w`}
     sizes={sizes}
@@ -24,7 +25,7 @@ const { w, h, sm } = imageInfo(name);
     width={w}
     height={h}
     loading={eager ? undefined : 'lazy'}
-    fetchpriority={high ? 'high' : undefined}
+    fetchpriority={high ? 'high' : low ? 'low' : undefined}
     decoding="async"
   />
 </picture>

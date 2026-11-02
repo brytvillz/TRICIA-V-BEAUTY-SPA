@@ -506,16 +506,22 @@ footer li a:hover { color: var(--accent-text) }
 .notfound .btn { margin-top: 32px }
 
 
+/* ───────── PHOTOS: a calm placeholder, then a fade-in as each one arrives ───────── */
+img.ph { transition: opacity .3s ease }
+img.ph:not(.story-photo):not(.story-bg) { background-color: var(--surface) }   /* the story viewer's own photo and blurred backdrop keep their look */
+img.ph.ph-wait { opacity: 0 }   /* set by site.js only for photos that are not loaded yet, so without JS nothing is ever hidden */
+@media (prefers-reduced-motion: reduce) { img.ph { transition: none } }
+
 /* ───────── SPLASH ───────── */
-/* Covers the page for about half a second on the first visit of a session. The page underneath renders
+/* Covers the page on the first visit of a session until the hero is ready (never under 0.4s, never over 3s). The page underneath renders
    normally the whole time. Hidden unless the head script adds html.splash-on. */
 .splash { display: none; position: fixed; inset: 0; z-index: 2000; place-items: center; background: var(--bg); opacity: 1; transition: opacity .3s ease }
-html.splash-on .splash { display: grid; animation: splash-failsafe .3s ease 3.6s forwards }   /* same 3.6s + 300ms fade without any script, so it can never get stuck */
+html.splash-on .splash { display: grid; animation: splash-failsafe .3s ease 3s forwards }   /* same 3s + 300ms fade without any script, so it can never get stuck */
 .splash.is-out { opacity: 0; pointer-events: none }
 .splash-mark { position: relative; width: 132px; height: 132px; display: grid; place-items: center }
-.splash-mark img { width: 84px; height: 84px; opacity: 0; animation: splash-in .8s ease .1s forwards }
+.splash-mark img { width: 84px; height: 84px; opacity: 0; animation: splash-in .3s ease .05s forwards }
 .splash-ring { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg) }
-.splash-ring circle { fill: none; stroke: var(--accent-text); stroke-width: 1.5; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: splash-ring 2.8s ease-in-out .1s forwards }
+.splash-ring circle { fill: none; stroke: var(--accent-text); stroke-width: 1.5; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: splash-ring .38s ease-out .02s forwards }
 @keyframes splash-ring { to { stroke-dashoffset: 0 } }
 @keyframes splash-in { to { opacity: 1 } }
 @keyframes splash-failsafe { to { opacity: 0; visibility: hidden; pointer-events: none } }

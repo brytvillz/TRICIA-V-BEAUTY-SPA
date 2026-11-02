@@ -20,8 +20,8 @@ import { gallery } from '../data/home';
             {gallery.map((g, i) => (
               <figure class={i === 0 ? 'story-slide is-current' : 'story-slide'} data-label={g.label} aria-hidden={i === 0 ? undefined : 'true'}>
                 <!-- decorative backdrop: the same photo, scaled to cover, blurred and darkened (CSS); same loading as the photo -->
-                <picture class="story-bgpic" aria-hidden="true"><source srcset={`/images/${g.name}-sm.webp`} type="image/webp" /><img class="story-bg" src={`/images/${g.name}-sm.jpg`} alt="" width="450" height="450" loading={i === 0 ? undefined : 'lazy'} decoding="async" /></picture>
-                <Picture class="story-photo" name={g.name} alt={g.alt} sizes="300px" eager={i === 0} />
+                <picture class="story-bgpic" aria-hidden="true"><source srcset={`/images/${g.name}-sm.webp`} type="image/webp" /><img class="ph story-bg" src={`/images/${g.name}-sm.jpg`} alt="" width="450" height="450" loading={i === 0 ? undefined : 'lazy'} fetchpriority={i === 0 ? 'low' : undefined} decoding="async" /></picture>
+                <Picture class="story-photo" name={g.name} alt={g.alt} sizes="300px" eager={i === 0} low={i === 0} />
               </figure>
             ))}
           </div>
