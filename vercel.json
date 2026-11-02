@@ -17,12 +17,12 @@
     },
     {
       "source": "/book",
-      "destination": "/booking",
+      "destination": "/booking?src=qr",
       "statusCode": 307
     },
     {
       "source": "/book/",
-      "destination": "/booking",
+      "destination": "/booking?src=qr",
       "statusCode": 307
     }
   ],

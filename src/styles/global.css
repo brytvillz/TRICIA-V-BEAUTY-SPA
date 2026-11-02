@@ -450,8 +450,10 @@ footer li a:hover { color: var(--accent-text) }
 .wa-float {
   position: fixed; right: 24px; bottom: 24px; z-index: 150; width: 60px; height: 60px; border-radius: 50%;
   background: var(--wa); color: var(--wa-fg); display: grid; place-items: center; box-shadow: 0 8px 28px var(--shadow);
-  animation: pulse 2s ease-in-out infinite; transition: transform .25s;
+  animation: pulse 2s ease-in-out infinite; transition: transform .25s, opacity .3s ease, visibility 0s;
 }
+/* home page only: out of the way while the hero booking card (and its video bubble) is on screen; hidden fully, so it is not tabbable either */
+.wa-float.is-away { opacity: 0; visibility: hidden; pointer-events: none; transition: transform .25s, opacity .3s ease, visibility 0s linear .3s }
 .wa-float .ic { width: 30px; height: 30px }
 .wa-float:hover { animation: none; transform: scale(1.12) }
 .wa-tip {
