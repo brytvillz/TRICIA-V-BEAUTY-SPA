@@ -1,7 +1,6 @@
 ---
 import Picture from './Picture.astro';
 import { gallery } from '../data/home';
-import { SIZES } from '../lib/images';
 ---
 <section class="sec" id="gallery">
   <div class="wrap">
@@ -11,12 +10,52 @@ import { SIZES } from '../lib/images';
         <h2 class="title">See it <em>for yourself.</em></h2>
       </div>
     </div>
-    <div class="gal-grid">
-      {gallery.map((g) => (
-        <button type="button" class="gal-item media" data-reveal aria-label={`Open photo: ${g.alt}`}>
-          <Picture name={g.name} alt={g.alt} sizes={SIZES.gallery} />
-        </button>
-      ))}
+
+    <div class="stories-layout">
+      <!-- A generic phone frame (no brand marks) around a stories-style viewer -->
+      <div class="phone">
+        <span class="phone-speaker" aria-hidden="true"></span>
+        <div class="viewer" id="storyViewer" role="region" aria-roledescription="photo viewer" aria-label="Our work, photo stories" tabindex="0">
+          <div class="story-slides">
+            {gallery.map((g, i) => (
+              <figure class={i === 0 ? 'story-slide is-current' : 'story-slide'} data-label={g.label} aria-hidden={i === 0 ? undefined : 'true'}>
+                <Picture name={g.name} alt={g.alt} sizes="620px" eager={i === 0} />
+              </figure>
+            ))}
+          </div>
+          <div class="story-shade" aria-hidden="true"></div>
+          <button type="button" class="story-zone story-prev" id="storyPrev" aria-label="Previous photo"></button>
+          <button type="button" class="story-zone story-next" id="storyNext" aria-label="Next photo"></button>
+          <div class="story-top">
+            <div class="story-bars" aria-hidden="true">
+              {gallery.map((_, i) => <span class={i === 0 ? 'bar is-current' : 'bar'}><i></i></span>)}
+            </div>
+            <div class="story-head">
+              <picture><source srcset="/images/logo-mark-192.webp" type="image/webp" /><img class="story-mark" src="/images/logo-mark-192.png" alt="" width="192" height="192" loading="lazy" decoding="async" /></picture>
+              <span class="story-name">TRICIA-V</span>
+              <span class="story-label" id="storyLabel">{gallery[0].label}</span>
+              <span class="story-actions">
+                <button type="button" class="story-btn" id="storyPause" aria-label="Pause" aria-pressed="false">
+                  <svg class="ic i-pausing" aria-hidden="true"><use href="#i-pause" /></svg>
+                  <svg class="ic i-playing" aria-hidden="true"><use href="#i-play" /></svg>
+                </button>
+                <button type="button" class="story-btn" id="storyEnlarge" aria-label="View photo larger">
+                  <svg class="ic" aria-hidden="true"><use href="#i-expand" /></svg>
+                </button>
+              </span>
+            </div>
+          </div>
+          <p class="sr-only" id="storyLive" aria-live="polite" aria-atomic="true"></p>
+        </div>
+      </div>
+
+      <div class="thumbs" id="storyThumbs" role="group" aria-label="All photos">
+        {gallery.map((g, i) => (
+          <button type="button" class="thumb" data-i={i} aria-label={g.alt} aria-current={i === 0 ? 'true' : 'false'}>
+            <Picture name={g.name} alt="" sizes="(max-width: 899px) 76px, 150px" />
+          </button>
+        ))}
+      </div>
     </div>
   </div>
 </section>
@@ -25,3 +64,7 @@ import { SIZES } from '../lib/images';
   <button type="button" class="lb-close" id="lbClose" aria-label="Close photo"><svg class="ic" aria-hidden="true"><use href="#i-close" /></svg></button>
   <img id="lbImg" src="" alt="" />
 </div>
+
+<script>
+  import '../scripts/stories.js';
+</script>

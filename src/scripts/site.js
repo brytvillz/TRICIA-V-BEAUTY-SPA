@@ -206,11 +206,11 @@ if (lb) {
     if (lenis) lenis.start(); else root.style.overflow = '';
     if (lastFocus) lastFocus.focus();
   };
-  document.querySelectorAll('.gal-item').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const img = btn.querySelector('img');
-      if (img) open(img.getAttribute('src'), img.alt);
-    });
+  // the viewer's "View photo larger" button opens the current photo (full-size .jpg) in the lightbox
+  const enlarge = $('#storyEnlarge');
+  if (enlarge) enlarge.addEventListener('click', () => {
+    const img = document.querySelector('.story-slide.is-current img');
+    if (img) open(img.getAttribute('src'), img.alt);
   });
   lb.addEventListener('click', (e) => { if (e.target !== lbImg) close(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
@@ -220,6 +220,12 @@ document.addEventListener('keydown', (e) => {
   if (menuIsOpen()) { closeMenu(); return; }
   if (menu && menu.classList.contains('open')) { setSub(false); if (menuBtn) menuBtn.focus(); }
 });
+
+/* ── About image: bounce only while it is on screen (CSS does the motion; none under reduced motion) ── */
+const aboutArt = $('#aboutArt');
+if (aboutArt && !reduce && 'IntersectionObserver' in window) {
+  new IntersectionObserver((es) => es.forEach((e) => aboutArt.classList.toggle('is-live', e.isIntersecting)), { threshold: 0.3 }).observe(aboutArt);
+}
 
 /* ── In-page anchors (smooth with Lenis when it is running) ── */
 document.addEventListener('click', (e) => {
@@ -291,13 +297,6 @@ async function motion() {
     });
   });
 
-  /* Gallery: a few percent of scale as each image crosses the viewport */
-  gsap.utils.toArray('.gal-item img').forEach((img) => {
-    gsap.fromTo(img, { scale: 1.06 }, {
-      scale: 1, ease: 'none',
-      scrollTrigger: { trigger: img.parentElement.parentElement, start: 'top bottom', end: 'bottom top', scrub: true },
-    });
-  });
   ScrollTrigger.refresh();
 }
 const startMotion = () => (window.requestIdleCallback ? window.requestIdleCallback(motion, { timeout: 2000 }) : setTimeout(motion, 300));

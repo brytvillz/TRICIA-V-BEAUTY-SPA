@@ -29,18 +29,20 @@ export const serviceGroups: ServiceGroup[] = [
 export interface GalleryItem {
   name: string;
   alt: string;
+  /** the service shown in the viewer's header row */
+  label: string;
 }
 
 export const gallery: GalleryItem[] = [
-  { name: 'gallery-01', alt: 'Facial treatment with steam at TRICIA-V' },
-  { name: 'gallery-02', alt: 'Client under an LED light therapy mask' },
-  { name: 'gallery-03', alt: 'Long curly braids, finished, in front of the TRICIA-V sign' },
-  { name: 'gallery-04', alt: 'Knotless box braids, finished' },
-  { name: 'gallery-05', alt: 'Foot massage during a spa pedicure' },
-  { name: 'gallery-06', alt: 'Almond nails with black French tips' },
-  { name: 'gallery-07', alt: 'Eyelash extensions being applied at TRICIA-V' },
-  { name: 'gallery-08', alt: "Winged dollar-sign tattoo on a client's shoulder" },
-  { name: 'gallery-teeth', alt: 'Teeth whitening before and after at TRICIA-V' },
+  { name: 'gallery-01', alt: 'Facial treatment with steam at TRICIA-V', label: 'Facials' },
+  { name: 'gallery-02', alt: 'Client under an LED light therapy mask', label: 'Facials' },
+  { name: 'gallery-03', alt: 'Long curly braids, finished, in front of the TRICIA-V sign', label: 'Hair and barbing' },
+  { name: 'gallery-04', alt: 'Knotless box braids, finished', label: 'Hair and barbing' },
+  { name: 'gallery-05', alt: 'Foot massage during a spa pedicure', label: 'Nails and spa' },
+  { name: 'gallery-06', alt: 'Almond nails with black French tips', label: 'Nails and spa' },
+  { name: 'gallery-07', alt: 'Eyelash extensions being applied at TRICIA-V', label: 'Lash extensions' },
+  { name: 'gallery-08', alt: "Winged dollar-sign tattoo on a client's shoulder", label: 'Tattoos' },
+  { name: 'gallery-teeth', alt: 'Teeth whitening before and after at TRICIA-V', label: 'Dental care' },
 ];
 
 export interface Pkg {
