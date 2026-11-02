@@ -5,6 +5,7 @@ import ServiceGroupCard from '../components/ServiceGroupCard.astro';
 import { getCollection } from 'astro:content';
 import Gallery from '../components/Gallery.astro';
 import MapEmbed from '../components/MapEmbed.astro';
+import BookingForm from '../components/BookingForm.astro';
 import { serviceGroups, packages, ticker } from '../data/home';
 import { SIZES } from '../lib/images';
 import { wa, PHONE_E164, PHONE_DISPLAY } from '../lib/site';
@@ -145,10 +146,8 @@ const taglines = Object.fromEntries((await getCollection('services')).map((e) =>
       <div class="book-cta" data-reveal>
         <p class="eyebrow">Book</p>
         <h2 class="title">Ready to <em>Treat Yourself?</em></h2>
-        <p class="lede">Book your appointment on WhatsApp.</p>
-        <a class="btn btn-wa" href={wa()} target="_blank" rel="noopener">
-          <svg class="ic" aria-hidden="true"><use href="#i-wa" /></svg>Chat on WhatsApp
-        </a>
+        <p class="lede">Choose your service and a day that suits you. We'll confirm your time on WhatsApp.</p>
+        <BookingForm />
         <p class="book-hours">Mon-Sat, 8:00am - 9:00pm</p>
       </div>
 
