@@ -1,0 +1,89 @@
+---
+import { bookingGroups, NOT_SURE, TIMES } from '../data/booking';
+import { wa } from '../lib/site';
+---
+<div class="hero-book">
+  <div class="hero-card">
+    <!-- The salon video in a bubble on the card's top-right corner; "Watch tour" opens it full screen. -->
+    <div class="bubble-wrap">
+      <div class="bubble">
+        <video
+          id="heroVideo"
+          poster="/images/about-poster-sm.jpg"
+          width="560" height="700"
+          muted loop playsinline preload="none"
+          aria-label="A short tour of TRICIA-V and some of our treatments">
+          <source data-src="/videos/about-loop.webm" type="video/webm" />
+          <source data-src="/videos/about-loop.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <button type="button" class="tour-btn" id="tourBtn" aria-haspopup="dialog" hidden>
+        <svg class="ic" aria-hidden="true"><use href="#i-play" /></svg>Watch tour
+      </button>
+    </div>
+
+    <div class="hc-head">
+      <h2 class="hc-title">Book a visit</h2>
+      <!-- Default works without JS; site.js replaces it with the live Lagos-time status. -->
+      <p class="status" id="status" data-state="default" aria-live="polite"><span class="dot" aria-hidden="true"></span><span id="statusText">Open Mon to Sat · 8am to 9pm</span></p>
+    </div>
+
+    <!-- Shown until the script starts the form: also the fallback with JavaScript off -->
+    <div class="hbook-fallback" id="heroFallback">
+      <a class="btn btn-wa" href={wa()} target="_blank" rel="noopener">
+        <svg class="ic" aria-hidden="true"><use href="#i-wa" /></svg>Chat with us on WhatsApp
+      </a>
+    </div>
+
+    <form class="hbook" id="heroForm" novalidate hidden>
+      <div class="field" id="hfield-service">
+        <label for="h-service">Service</label>
+        <select id="h-service" name="service" required aria-describedby="h-service-err">
+          <option value="">Choose a service</option>
+          {bookingGroups.map((g) => (
+            <optgroup label={g.label}>
+              {g.options.map((o) => <option value={o}>{o}</option>)}
+            </optgroup>
+          ))}
+          <option value={NOT_SURE}>{NOT_SURE}</option>
+        </select>
+        <p class="err" id="h-service-err" hidden></p>
+      </div>
+
+      <div class="field" id="hfield-day">
+        <label for="h-day">Day</label>
+        <input type="date" id="h-day" name="day" required aria-describedby="h-day-err" />
+        <p class="err" id="h-day-err" hidden></p>
+      </div>
+
+      <fieldset class="field" id="hfield-time" role="radiogroup" aria-required="true" aria-describedby="h-time-err">
+        <legend>Time</legend>
+        <div class="hchoices">
+          {TIMES.map((t, i) => (
+            <label class="hchoice">
+              <input type="radio" name="htime" value={t.value} data-key={t.label.toLowerCase()} required={i === 0} />
+              <span>{t.label}</span>
+            </label>
+          ))}
+        </div>
+        <p class="err" id="h-time-err" hidden></p>
+      </fieldset>
+
+      <button type="submit" class="btn btn-wa hbook-send">
+        <svg class="ic" aria-hidden="true"><use href="#i-wa" /></svg>Send on WhatsApp
+      </button>
+    </form>
+
+    <p class="hc-more">Want home service or to add a note? <a href="/booking" id="heroFull">Full booking form</a></p>
+  </div>
+
+  <dialog class="tour" id="tourDialog" aria-label="Salon tour video">
+    <button type="button" class="tour-close" id="tourClose" aria-label="Close video">
+      <svg class="ic" aria-hidden="true"><use href="#i-close" /></svg>
+    </button>
+    <video id="tourVideo" playsinline preload="none" poster="/images/about-poster.jpg" aria-label="A short tour of TRICIA-V and some of our treatments"></video>
+  </dialog>
+</div>
+<script>
+  import '../scripts/hero-book.js';
+</script>

@@ -1,8 +1,8 @@
 /* Booking form: validates in the browser, then opens WhatsApp with the request written out. No backend, no storage. */
+import { WA, lagosToday, parseDay, DAY_ERRORS, dayProblem as dayProblemOf, dayLabel } from './bookdate.js';
 const form = document.getElementById('bookingForm');
 if (form) {
   const $ = (id) => document.getElementById(id);
-  const WA = 'https://wa.me/2348061172417?text=';
   const service = $('f-service'), day = $('f-day'), name = $('f-name'), home = $('f-home'), loc = $('f-location'), note = $('f-note');
   const radios = [...form.querySelectorAll('input[name="time"]')];
 
@@ -10,19 +10,8 @@ if (form) {
   form.hidden = false; $('bookingFallback').hidden = true;
 
   /* ── helpers ── */
-  const WEEKDAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   const key = (s) => String(s).toLowerCase().replace(/[^a-z0-9]/g, '');
   const oneLine = (s) => s.replace(/\s+/g, ' ').trim();
-  function lagosToday() {   // today's date in Nigeria (WAT), whatever the visitor's own time zone
-    const parts = new Intl.DateTimeFormat('en-GB', { timeZone: 'Africa/Lagos', year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(new Date());
-    const g = (t) => parts.find((p) => p.type === t).value;
-    return `${g('year')}-${g('month')}-${g('day')}`;
-  }
-  function parseDay(v) {   // "2026-11-08" -> a calendar date (built from its parts, so no time-zone shift)
-    const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(v || ''); if (!m) return null;
-    const d = new Date(+m[1], +m[2] - 1, +m[3]); return d.getMonth() === +m[2] - 1 ? d : null;
-  }
   const today = lagosToday();
   day.min = today;
 
@@ -40,6 +29,12 @@ if (form) {
       service.options[0].textContent = `Choose a treatment (${group.label} shown first)`;
     } else if (k === 'homeservice') { home.checked = true; }
   }
+
+  /* ── ?day=2026-11-08 and ?time=morning|afternoon|evening (carried over from the home hero card) ── */
+  const q = new URLSearchParams(location.search);
+  const wantDay = q.get('day'), wantTime = q.get('time');
+  if (wantDay && parseDay(wantDay)) day.value = wantDay;   // a Sunday or past day still shows its error, below
+  if (wantTime) { const r = radios.find((x) => key(x.value).startsWith(key(wantTime))); if (r) r.checked = true; }
 
   /* ── home service toggle ── */
   const locField = $('field-location');
@@ -65,11 +60,7 @@ if (form) {
     const field = el.name === 'time' ? $('field-time') : el;
     field.removeAttribute('aria-invalid'); field.closest('.field').classList.remove('has-error');
   }
-  const DAY_ERRORS = { none: 'Please choose a day.', bad: 'Please choose a valid day.', past: 'Please pick today or a later day.', sunday: "We're closed on Sundays. Please pick Monday to Saturday." };
-  function dayProblem() {
-    if (!day.value) return 'none'; const d = parseDay(day.value); if (!d) return 'bad';
-    if (day.value < today) return 'past'; if (d.getDay() === 0) return 'sunday'; return null;
-  }
+  const dayProblem = () => dayProblemOf(day.value, today);
   // tell people about a Sunday (or a past day) as soon as they pick it, not only when they press send
   const liveDay = () => { const p = dayProblem(); if (p && p !== 'none') setError(day, DAY_ERRORS[p]); else clearError(day); };
   day.addEventListener('change', liveDay); day.addEventListener('input', liveDay);
@@ -78,6 +69,7 @@ if (form) {
   name.addEventListener('input', () => { if (name.value.trim()) clearError(name); });
   loc.addEventListener('input', () => { if (loc.value.trim()) clearError(loc); });
 
+  if (day.value) liveDay();
   syncHome();   // initial state (may have been ticked by ?service=home-service)
 
   /* ── validate, in page order; focus the first problem ── */
@@ -94,11 +86,10 @@ if (form) {
 
   /* ── the WhatsApp message ── */
   function message() {
-    const d = parseDay(day.value);
     const lines = [
       "Hello TRICIA-V, I'd like to book an appointment.",
       `Service: ${service.value}`,
-      `Day: ${WEEKDAYS[d.getDay()]} ${d.getDate()} ${MONTHS[d.getMonth()]}`,
+      `Day: ${dayLabel(day.value)}`,
       `Time: ${radios.find((r) => r.checked).value}`,
       `Name: ${oneLine(name.value)}`,
     ];
