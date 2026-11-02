@@ -32,8 +32,10 @@ import { gallery } from '../data/home';
             </div>
             <div class="story-head">
               <picture><source srcset="/images/logo-mark-192.webp" type="image/webp" /><img class="story-mark" src="/images/logo-mark-192.png" alt="" width="192" height="192" loading="lazy" decoding="async" /></picture>
-              <span class="story-name">TRICIA-V</span>
-              <span class="story-label" id="storyLabel">{gallery[0].label}</span>
+              <span class="story-id">
+                <span class="story-name">TRICIA-V</span>
+                <span class="story-label" id="storyLabel">{gallery[0].label}</span>
+              </span>
               <span class="story-actions">
                 <button type="button" class="story-btn" id="storyPause" aria-label="Pause" aria-pressed="false">
                   <svg class="ic i-pausing" aria-hidden="true"><use href="#i-pause" /></svg>
