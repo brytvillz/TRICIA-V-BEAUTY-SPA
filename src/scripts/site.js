@@ -209,7 +209,6 @@ document.addEventListener('click', (e) => {
   const target = u.hash === '#' ? document.body : document.querySelector(u.hash);
   if (!target) return;
   e.preventDefault();
-  if (target.classList && target.classList.contains('svc')) { target.classList.remove('flash'); void target.offsetWidth; target.classList.add('flash'); }
   // header clearance comes from the scroll-margin-top on sections and cards (honoured by Lenis and by scrollIntoView)
   if (lenis) lenis.scrollTo(target);
   else target.scrollIntoView({ behavior: 'auto', block: 'start' });
@@ -240,6 +239,36 @@ async function motion() {
       onEnter: (batch) => gsap.to(batch, { y: 0, opacity: 1, duration: 1.1, ease: 'power3.out', stagger: 0.12, overwrite: true, clearProps: 'transform,opacity' }),
     });
   }
+
+  /* Service stack: as each card reaches its sticky position the previous one scales back and dims,
+     the new photo settles from 1.08 to 1 (scrubbed), and the pills slide in. Transforms and opacity only. */
+  const cards = gsap.utils.toArray('.gcard');
+  const stickTop = (card) => parseFloat(getComputedStyle(card).top) || 0;
+  cards.forEach((card, i) => {
+    const img = card.querySelector('.g-photo img');
+    gsap.fromTo(img, { scale: 1.08 }, {
+      scale: 1, ease: 'none',
+      scrollTrigger: { trigger: card, start: 'top bottom', end: () => 'top top+=' + stickTop(card), scrub: true, invalidateOnRefresh: true },
+    });
+    if (i > 0) {
+      const prev = cards[i - 1];
+      const tl = gsap.timeline({
+        defaults: { ease: 'none' },
+        scrollTrigger: {
+          trigger: card, scrub: true, invalidateOnRefresh: true,
+          start: () => 'top top+=' + (stickTop(prev) + prev.offsetHeight),   // this card's top meets the previous card's bottom
+          end: () => 'top top+=' + stickTop(card),                           // ...until it reaches its own sticky spot
+        },
+      });
+      tl.fromTo(prev, { scale: 1 }, { scale: 0.94, transformOrigin: '50% 0%' }, 0)
+        .fromTo(prev.querySelector('.g-dim'), { opacity: 0 }, { opacity: 0.38 }, 0);
+    }
+    const pills = card.querySelectorAll('.pill');
+    gsap.from(pills, {
+      y: 14, opacity: 0, duration: 0.7, stagger: 0.06, ease: 'power3.out', clearProps: 'transform,opacity',
+      scrollTrigger: { trigger: card, start: 'top 75%', end: 'max', once: true },
+    });
+  });
 
   /* Gallery: a few percent of scale as each image crosses the viewport */
   gsap.utils.toArray('.gal-item img').forEach((img) => {
