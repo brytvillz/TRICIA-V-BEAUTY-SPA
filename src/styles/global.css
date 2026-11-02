@@ -251,18 +251,74 @@ section { position: relative; scroll-margin-top: var(--nav-h) }
 
 /* ───────── GALLERY ───────── */
 .gal-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px }
-.gal-grid { margin-top: 72px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px }
-.gal-item { display: block; width: 100%; aspect-ratio: 1 / 1; cursor: zoom-in }
-.gal-item:nth-child(3n+2) { margin-top: 56px }
-.gal-item img { transform: scale(1.06) }
 .lb { position: fixed; inset: 0; z-index: 200; display: none; align-items: center; justify-content: center; padding: 24px; background: rgba(5, 5, 5, .94) }
 .lb.open { display: flex }
 .lb img { max-width: min(92vw, 1000px); max-height: 88vh; width: auto; height: auto; border: 1px solid rgba(255, 255, 255, .25) }
 .lb-close { position: absolute; top: 18px; right: 18px; width: 48px; height: 48px; color: #fff; display: grid; place-items: center }
 
+
+/* ───────── OUR WORK: phone stories viewer ───────── */
+.stories-layout { margin: 56px auto 0; max-width: 980px; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(40px, 6vw, 96px); align-items: center; justify-content: center }
+.phone {
+  position: relative; width: min(320px, calc((100vh - var(--nav-h) - 48px) * 9 / 18.6)); width: min(320px, calc((100svh - var(--nav-h) - 48px) * 9 / 18.6)); aspect-ratio: 9 / 18.6; padding: 26px 11px 13px; border-radius: 48px;
+  background: #0d0c0b; border: 1px solid rgba(255, 255, 255, .14);
+  box-shadow: 0 40px 80px -30px var(--shadow), inset 0 0 0 2px #1f1d1b;
+}
+.phone-speaker { position: absolute; top: 11px; left: 50%; width: 54px; height: 5px; margin-left: -27px; border-radius: 4px; background: #000; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08) }
+.viewer { position: relative; width: 100%; height: 100%; border-radius: 36px; overflow: hidden; background: #000; touch-action: pan-y; -webkit-user-select: none; user-select: none; color: #fff }
+.viewer:focus-visible { outline-offset: 5px }
+.story-slides { position: absolute; inset: 0 }
+/* hidden slides are also visibility:hidden, so their blurred backdrops cost nothing */
+.story-slide { position: absolute; inset: 0; margin: 0; overflow: hidden; opacity: 0; visibility: hidden; transition: opacity .35s ease, visibility 0s linear .35s }
+.story-slide.is-current { opacity: 1; visibility: visible; transition: opacity .35s ease }
+.story-slide picture { position: absolute; inset: 0; display: block }
+.story-slide img { position: absolute; display: block }
+/* the photo is shown whole... */
+.story-slide img.story-photo { inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: center }
+/* ...over a blurred, darkened copy of itself that fills the rest of the screen (inset overshoots so the blur never shows an edge) */
+.story-slide img.story-bg { inset: -14%; width: 128%; height: 128%; max-width: none; object-fit: cover; filter: blur(24px) brightness(.62) saturate(1.1) }
+.story-shade { position: absolute; inset: 0 0 auto 0; height: 140px; background: linear-gradient(180deg, rgba(0, 0, 0, .62), transparent); pointer-events: none }
+.story-zone { position: absolute; top: 0; bottom: 0; width: 50%; z-index: 2; cursor: pointer; -webkit-tap-highlight-color: transparent }
+.story-prev { left: 0 } .story-next { right: 0 }
+.story-top { position: absolute; z-index: 3; top: 0; left: 0; right: 0; padding: 12px 12px 0; pointer-events: none }
+.story-bars { display: flex; gap: 3px }
+.bar { flex: 1; height: 2.5px; border-radius: 2px; background: rgba(255, 255, 255, .34); overflow: hidden }
+.bar i { display: block; height: 100%; background: #fff; transform: scaleX(0); transform-origin: left }
+.bar.is-done i { transform: scaleX(1) }
+.bar.is-current i { animation: story-fill 4s linear forwards }
+.viewer.is-paused .bar.is-current i { animation-play-state: paused }
+@keyframes story-fill { to { transform: scaleX(1) } }
+.story-head { display: flex; align-items: center; gap: 8px; margin-top: 10px; pointer-events: none }
+.story-mark { width: 28px; height: 28px; border-radius: 50%; flex: none }
+.story-id { display: flex; flex-direction: column; gap: 3px; min-width: 0 }
+.story-name { font-family: var(--serif); font-weight: 600; font-size: 15px; letter-spacing: .1em; line-height: 1; white-space: nowrap }
+.story-label { font-size: 11.5px; opacity: .88; line-height: 1.1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis }
+.story-actions { margin-left: auto; display: flex; gap: 2px; pointer-events: auto }
+.story-btn { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; color: #fff; background: rgba(0, 0, 0, .28); -webkit-tap-highlight-color: transparent }
+.story-btn .ic { width: 17px; height: 17px }
+.story-btn .i-playing { display: none }
+.story-btn.is-paused .i-playing { display: block } .story-btn.is-paused .i-pausing { display: none }
+.story-btn[hidden] { display: none }
+.thumbs { display: grid; grid-template-columns: repeat(3, 150px); gap: 12px; justify-content: start }
+.thumb { position: relative; aspect-ratio: 1 / 1; border-radius: 12px; overflow: hidden; background: var(--surface-2); border: 1px solid var(--line); padding: 0; transition: box-shadow .25s, transform .25s }
+.thumb picture, .thumb img { position: absolute; inset: 0; width: 100%; height: 100%; display: block }
+.thumb img { object-fit: cover }
+.thumb[aria-current="true"] { box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent-text) }   /* current photo: gold outline */
+@media (hover: hover) and (pointer: fine) { .thumb:hover { transform: translateY(-3px) } }
+@media (max-width: 899px) {
+  .stories-layout { grid-template-columns: minmax(0, 1fr); justify-items: center; gap: 26px; margin-top: 40px }
+  .phone { width: min(300px, 78vw, calc((100vh - var(--nav-h) - 40px) * 9 / 18.6)); width: min(300px, 78vw, calc((100svh - var(--nav-h) - 40px) * 9 / 18.6)) }
+  .thumbs { display: flex; overflow-x: auto; gap: 10px; padding: 6px 4px 10px; width: 100%; max-width: 560px; scroll-snap-type: x proximity; scrollbar-width: none; -webkit-overflow-scrolling: touch }
+  .thumbs::-webkit-scrollbar { display: none }
+  .thumb { flex: 0 0 76px; width: 76px; scroll-snap-align: center; border-radius: 10px }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bar.is-current i { animation: none; transform: scaleX(1) }
+  .story-slide { transition: none }
+}
+
 /* ───────── ABOUT ───────── */
 .about-grid { display: grid; grid-template-columns: 5fr 6fr; gap: clamp(40px, 8vw, 120px); align-items: start }
-.about-img { aspect-ratio: 4 / 5; width: 100% }
 .about-copy p { max-width: 62ch; color: var(--muted) }
 .about-copy p + p { margin-top: 20px }
 .about-copy h2 { margin-bottom: 28px }
@@ -270,6 +326,37 @@ section { position: relative; scroll-margin-top: var(--nav-h) }
 .values li { display: flex; align-items: baseline; gap: 20px; padding: 20px 0; border-top: 1px solid var(--line); font-family: var(--serif); font-size: 24px; line-height: 1.3; color: var(--fg) }
 .values li:last-child { border-bottom: 1px solid var(--line) }
 .values li::before { content: ""; flex: none; width: 32px; height: 1px; background: var(--accent-text); transform: translateY(-.3em) }
+
+
+/* About image: soft organic shape with a gentle bounce (transform and opacity only, only while on screen) */
+.about-art { position: relative; width: 100%; max-width: 420px; aspect-ratio: 4 / 5; margin-bottom: 34px }
+.blob { position: absolute; inset: 0; z-index: 1; border-radius: 58% 42% 52% 48% / 48% 58% 42% 52%; overflow: hidden; background: var(--surface-2) }
+.blob picture, .blob img { position: absolute; inset: 0; width: 100%; height: 100%; display: block }
+.blob img { object-fit: cover }
+.blob-outline { position: absolute; inset: 0; z-index: 0; border: 1px solid var(--accent-line); border-radius: 44% 56% 47% 53% / 55% 45% 58% 42%; transform: translate(16px, 14px) }
+.blob-shadow { position: absolute; z-index: 0; left: 16%; right: 16%; bottom: -26px; height: 26px; border-radius: 50%; background: radial-gradient(ellipse at center, var(--shadow) 0%, transparent 68%); opacity: .85 }
+.about-art.is-live .blob { animation: hop 4s linear infinite }
+.about-art.is-live .blob-shadow { animation: hop-shadow 4s linear infinite }
+/* one hop every 4s: rise 14px, land, two smaller bounces, then rest */
+@keyframes hop {
+  0% { transform: translateY(0); animation-timing-function: cubic-bezier(.2, .8, .35, 1) }
+  11% { transform: translateY(-14px); animation-timing-function: cubic-bezier(.55, 0, .9, .5) }
+  21% { transform: translateY(0); animation-timing-function: cubic-bezier(.2, .8, .35, 1) }
+  27% { transform: translateY(-5px); animation-timing-function: cubic-bezier(.55, 0, .9, .5) }
+  33% { transform: translateY(0); animation-timing-function: cubic-bezier(.2, .8, .35, 1) }
+  37% { transform: translateY(-1.6px); animation-timing-function: ease-in }
+  41%, 100% { transform: translateY(0) }
+}
+/* the shadow shrinks and lightens as the image rises, and returns on landing */
+@keyframes hop-shadow {
+  0% { transform: scale(1); opacity: .85; animation-timing-function: cubic-bezier(.2, .8, .35, 1) }
+  11% { transform: scale(.7); opacity: .4; animation-timing-function: cubic-bezier(.55, 0, .9, .5) }
+  21% { transform: scale(1); opacity: .85; animation-timing-function: cubic-bezier(.2, .8, .35, 1) }
+  27% { transform: scale(.9); opacity: .65; animation-timing-function: cubic-bezier(.55, 0, .9, .5) }
+  33% { transform: scale(1); opacity: .85; animation-timing-function: cubic-bezier(.2, .8, .35, 1) }
+  37% { transform: scale(.97); opacity: .8; animation-timing-function: ease-in }
+  41%, 100% { transform: scale(1); opacity: .85 }
+}
 
 /* ───────── SIGNATURE ───────── */
 .pkg-head { max-width: 760px }
@@ -381,6 +468,21 @@ footer li a:hover { color: var(--accent-text) }
 .notfound .btn { margin-top: 32px }
 
 
+/* ───────── SPLASH ───────── */
+/* Covers the page for about half a second on the first visit of a session. The page underneath renders
+   normally the whole time. Hidden unless the head script adds html.splash-on. */
+.splash { display: none; position: fixed; inset: 0; z-index: 2000; place-items: center; background: var(--bg); opacity: 1; transition: opacity .3s ease }
+html.splash-on .splash { display: grid; animation: splash-failsafe .3s ease 1s forwards }   /* same 1s + 300ms fade without any script, so it can never get stuck */
+.splash.is-out { opacity: 0; pointer-events: none }
+.splash-mark { position: relative; width: 132px; height: 132px; display: grid; place-items: center }
+.splash-mark img { width: 84px; height: 84px; opacity: 0; animation: splash-in .3s ease .05s forwards }
+.splash-ring { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg) }
+.splash-ring circle { fill: none; stroke: var(--accent-text); stroke-width: 1.5; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: splash-ring .38s ease-out .02s forwards }
+@keyframes splash-ring { to { stroke-dashoffset: 0 } }
+@keyframes splash-in { to { opacity: 1 } }
+@keyframes splash-failsafe { to { opacity: 0; visibility: hidden; pointer-events: none } }
+@media (prefers-reduced-motion: reduce) { .splash { display: none !important } }
+
 /* ───────── MOBILE MENU PANEL (direct child of <body>) ───────── */
 .menu-panel {
   position: fixed; inset: 0; z-index: 1000; display: none; flex-direction: column;
@@ -418,9 +520,6 @@ html.menu-open .wa-float { display: none }
   .pkg-row { grid-template-columns: repeat(2, 1fr) }
   .pkg:nth-child(2) { margin-top: 0 }
   .pkg:nth-child(3) { grid-column: 1 / -1 }
-  .gal-grid { grid-template-columns: repeat(2, 1fr); gap: 12px }
-  .gal-item:nth-child(3n+2) { margin-top: 0 }
-  .gal-item:nth-child(even) { margin-top: 32px }
   .foot-grid { grid-template-columns: 1fr 1fr }
   .foot-brand { grid-column: 1 / -1 }
   .book-info { grid-template-columns: 1fr }
@@ -436,7 +535,7 @@ html.menu-open .wa-float { display: none }
   .burger { display: block }
   .nav-actions { margin-left: auto }
   .about-grid { grid-template-columns: 1fr }
-  .about-img { max-width: 420px }
+  .about-art { margin-inline: 4px 18px }
 }
 @media (max-width: 767px) {
   .stack { margin-top: 40px }
@@ -458,7 +557,6 @@ html.menu-open .wa-float { display: none }
   .hero-cta .btn { flex: 1 1 100% }
   .status { left: -6px; bottom: 22px }
   .ticker li { font-size: 22px; padding: 18px 0 }
-  .gal-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 48px }
   .pkg-row {
     display: flex; overflow-x: auto; gap: 16px; margin-top: 48px; margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter);
     scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter); -webkit-overflow-scrolling: touch; scrollbar-width: none;
@@ -482,7 +580,6 @@ html.menu-open .wa-float { display: none }
   .gcard { position: static }
   .stack { gap: 24px }
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important }
-  .gal-item img { transform: none }
   .ticker-track { width: auto }
   .ticker ul { flex-wrap: wrap; justify-content: center; padding: 8px var(--gutter) }
   .ticker ul[aria-hidden="true"] { display: none }

@@ -10,7 +10,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'sha256-RJZZZvLbUnvqoARIY5B4PogMjBoVjIvSt4CS3uotKK4='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; frame-src 'self' https://maps.google.com https://www.google.com; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; object-src 'none'"
+          "value": "default-src 'self'; script-src 'self' 'sha256-BCQThcEgEvrvMdYGpSOQTmMVW8To9u8ot1OQQdJhVJw='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; frame-src 'self' https://maps.google.com https://www.google.com; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; object-src 'none'"
         },
         { "key": "X-Content-Type-Options", "value": "nosniff" },
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },

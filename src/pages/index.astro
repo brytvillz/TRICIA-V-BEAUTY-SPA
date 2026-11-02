@@ -80,8 +80,12 @@ const taglines = Object.fromEntries((await getCollection('services')).map((e) =>
   <!-- ═════════ ABOUT ═════════ -->
   <section class="sec" id="about">
     <div class="wrap about-grid">
-      <div class="about-img media" data-reveal>
-        <Picture name="hero-main" alt="Therapist giving a client a cold-steam facial at TRICIA-V" sizes={SIZES.about} />
+      <div class="about-art" id="aboutArt" data-reveal>
+        <span class="blob-outline" aria-hidden="true"></span>
+        <span class="blob-shadow" aria-hidden="true"></span>
+        <div class="blob">
+          <Picture name="hero-main" alt="Therapist giving a client a cold-steam facial at TRICIA-V" sizes={SIZES.about} />
+        </div>
       </div>
       <div class="about-copy">
         <div data-reveal>
