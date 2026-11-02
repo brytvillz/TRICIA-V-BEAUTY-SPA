@@ -4,7 +4,6 @@
    size itself to the header (WebKit) instead of the screen. */
 import ThemeToggle from './ThemeToggle.astro';
 import { getCollection } from 'astro:content';
-import { wa } from '../lib/site';
 interface Props { path?: string }
 const { path = '/' } = Astro.props;
 const pages = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
@@ -34,6 +33,6 @@ const pages = (await getCollection('services')).sort((a, b) => a.data.order - b.
       <li><a href="/#gallery">Gallery</a></li>
       <li><a href="/#about">About</a></li>
     </ul>
-    <a href={wa()} class="btn btn-fill" target="_blank" rel="noopener">Book Now</a>
+    <a href="/booking" class="btn btn-fill">Book Now</a>
   </nav>
 </div>

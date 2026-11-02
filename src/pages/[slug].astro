@@ -4,7 +4,8 @@ import Base from '../layouts/Base.astro';
 import Picture from '../components/Picture.astro';
 import ServiceCard from '../components/ServiceCard.astro';
 import { SIZES, imageInfo } from '../lib/images';
-import { SITE, wa } from '../lib/site';
+import { SITE } from '../lib/site';
+import { bookingHref } from '../data/booking';
 
 export async function getStaticPaths() {
   const pages = await getCollection('services');
@@ -56,7 +57,7 @@ const service = {
         <h1 class="page-h1">{d.h1}</h1>
         <p class="tagline">{d.tagline}</p>
         <div class="hero-cta">
-          <a class="btn btn-fill" href={wa(d.navLabel)} target="_blank" rel="noopener">Book on WhatsApp</a>
+          <a class="btn btn-fill" href={bookingHref(d.slug)}>Book an appointment</a>
           <a class="btn btn-line" href="/#services">All services</a>
         </div>
       </div>
@@ -107,9 +108,7 @@ const service = {
         <h2>Book {d.navLabel}</h2>
         <p>Message us on WhatsApp with the treatment and the day you would like, and we will confirm. We reply during opening hours, Monday to Saturday, 8:00am to 9:00pm.</p>
       </div>
-      <a class="btn btn-wa" href={wa(d.navLabel)} target="_blank" rel="noopener">
-        <svg class="ic" aria-hidden="true"><use href="#i-wa" /></svg>Book on WhatsApp
-      </a>
+      <a class="btn btn-fill" href={bookingHref(d.slug)}>Book an appointment</a>
     </div>
   </div>
   <div class="page-end"></div>
