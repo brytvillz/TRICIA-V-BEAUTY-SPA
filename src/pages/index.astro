@@ -69,7 +69,7 @@ const taglines = Object.fromEntries((await getCollection('services')).map((e) =>
     </div>
     <div class="stack" id="svcStack">
       {serviceGroups.map((g, i) => (
-        <ServiceGroupCard index={i} total={serviceGroups.length} slug={g.slug} title={g.title} tagline={taglines[g.slug]} image={g.image} alt={g.alt} pills={g.pills} />
+        <ServiceGroupCard index={i} total={serviceGroups.length} slug={g.slug} title={g.title} tagline={g.description ?? taglines[g.slug]} image={g.image} alt={g.alt} pills={g.pills} />
       ))}
     </div>
   </section>

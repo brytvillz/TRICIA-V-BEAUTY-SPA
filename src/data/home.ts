@@ -5,12 +5,15 @@ export interface ServiceGroup {
   image: string;
   alt: string;
   pills: string[];
+  /** overrides the service page tagline as the card's one-line description */
+  description?: string;
 }
 
 /** The six service groups on the home page, one per service page, in this order. */
 export const serviceGroups: ServiceGroup[] = [
   { slug: 'dental-care', title: 'Dental care', image: 'gallery-teeth', alt: 'Teeth whitening before and after at TRICIA-V',
-    pills: ['Teeth whitening', 'Teeth scaling', 'Teeth polishing'] },
+    pills: ['Teeth whitening', 'Teeth scaling', 'Teeth polishing'],
+    description: 'A cleaner, brighter smile, for women and men.' },
   { slug: 'facials', title: 'Facials', image: 'gallery-01', alt: 'Facial treatment with steam at TRICIA-V',
     pills: ['Acne facial', 'Hyperpigmentation facial', 'Vampire facial', 'Moroccan radiance therapy', 'Skin consultation'] },
   { slug: 'hair-and-barbing', title: 'Hair and barbing', image: 'gallery-03', alt: 'Long curly braids, finished, in front of the TRICIA-V sign',
