@@ -4,12 +4,12 @@ const root = document.documentElement;
 const $ = (s, r = document) => r.querySelector(s);
 let lenis = null;
 
-/* ── Splash: leaves when the page has loaded (but not before 400ms, and never later than 1000ms) ── */
+/* ── Splash: leaves when the page has loaded (but not before 3s, and never later than 3.6s) ── */
 const splash = $('#splash');
 if (splash && root.classList.contains('splash-on')) {
-  const MIN = 430, MAX = 1000;   // MIN carries a ~30ms margin for the frame between 'started' and 'actually painted', so at least 400ms is really shown
+  const MIN = 3030, MAX = 3600;   // MIN carries a ~30ms margin for the frame between 'started' and 'actually painted', so at least 3000ms is really shown
   // the clock starts when the overlay really began to render (its ring animation's start time), not when the
-  // head script ran: the first paint can come noticeably later than that, and 400ms means 400ms on screen
+  // head script ran: the first paint can come noticeably later than that, and 3s means 3s on screen
   const ring = splash.querySelector('circle');
   const anim = ring && ring.getAnimations ? ring.getAnimations()[0] : null;
   const fp = performance.getEntriesByName ? performance.getEntriesByName('first-paint')[0] : null;   // the overlay is the first thing painted
